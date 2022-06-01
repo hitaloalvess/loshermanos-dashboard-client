@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ], //adiciona algumas funcionalidades, e entende que vamos estar trabalhando com a dom
+    "allowJs": true, //permite entender que na aplicação irá conter tanto código javascript quanto typescript
+    "jsx": "preserve", //permite entender que estará sendo utilizado jsx (html dentro do javascript)
+    "noEmit": true,
+    "strict": true, //entra no modo strict
+    "moduleResolution": "node",
+    "resolveJsonModule": true, //adiciona a possibilita de importar arquivos json
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "target": "es5",
+    "incremental": true,
+    "module": "esnext"
+  },
+  "include": [
+    "src"
+  ] //especifica onde o código da aplicação estará contido
+  ,
+  "exclude": [
+    "node_modules"
+  ]
+}
