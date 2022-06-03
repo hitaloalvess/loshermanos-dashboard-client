@@ -43,7 +43,7 @@ export default createGlobalStyle`
     color: var(--white);
   }
 
-  body, input, button{
+  body, input, button, select{
     font: 1.4rem Roboto Slab, sans-serif;
   }
 

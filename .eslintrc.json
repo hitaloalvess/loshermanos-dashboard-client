@@ -46,7 +46,8 @@
         "error",
         "ignorePackages",
         {
-            "ts": "never"
+            "ts": "never",
+            "tsx":"never"
         }
         ],
         "import-helpers/order-imports": [
