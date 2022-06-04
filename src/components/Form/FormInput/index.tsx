@@ -1,9 +1,12 @@
-import { ReactElement } from 'react';
+import { WarningCircle } from 'phosphor-react';
+import { forwardRef, ForwardRefRenderFunction, ReactElement } from 'react';
+import { FieldError } from 'react-hook-form';
 
-import { FormInputContainer } from './styles';
+import { FormInputContainer, InputMessageError } from './styles';
 
 interface IFormInput {
     name: string;
+    error?: FieldError;
     placeholder: string;
     type?: string;
     defaultValue?: string | number;
@@ -11,17 +14,21 @@ interface IFormInput {
     children?: ReactElement;
 }
 
-function FormInput({
-    name,
-    placeholder,
-    type,
-    defaultValue,
-    disabled,
-    children,
-    ...rest
-}: IFormInput) {
+const FormInputBase: ForwardRefRenderFunction<HTMLInputElement, IFormInput> = (
+    {
+        name,
+        error,
+        placeholder,
+        type,
+        defaultValue,
+        disabled,
+        children,
+        ...rest
+    }: IFormInput,
+    ref,
+) => {
     return (
-        <FormInputContainer hasIcon={!!children}>
+        <FormInputContainer hasIcon={!!children} error={error}>
             {children}
             <input
                 name={name}
@@ -29,10 +36,19 @@ function FormInput({
                 defaultValue={defaultValue || ''}
                 placeholder={placeholder}
                 disabled={disabled}
+                ref={ref}
                 {...rest}
             />
+
+            {!!error && <WarningCircle className="iconAlert" />}
+
+            {!!error && (
+                <InputMessageError>
+                    <p>{error.message}</p>
+                </InputMessageError>
+            )}
         </FormInputContainer>
     );
-}
+};
 
-export { FormInput };
+export const FormInput = forwardRef(FormInputBase);

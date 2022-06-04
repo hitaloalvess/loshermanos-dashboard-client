@@ -1,7 +1,9 @@
+import { FieldError } from 'react-hook-form';
 import styled from 'styled-components';
 
 interface IFormInputContainerProps {
     hasIcon?: boolean;
+    error?: FieldError;
 }
 
 const FormInputContainer = styled.div<IFormInputContainerProps>`
@@ -18,6 +20,12 @@ const FormInputContainer = styled.div<IFormInputContainerProps>`
         width: 2rem;
         height: 2rem;
         color: var(--text-secondary);
+
+        &.iconAlert {
+            margin-left: auto;
+            right: 2.4rem;
+            color: var(--red);
+        }
     }
 
     input {
@@ -26,6 +34,8 @@ const FormInputContainer = styled.div<IFormInputContainerProps>`
         padding: ${props =>
             props.hasIcon ? `1.6rem 5.2rem` : `1.6rem 2.4rem`};
         border: 3px solid transparent;
+        border: ${props =>
+            props.error ? `3px solid var(--red)` : `3px solid transparent`};
         border-radius: 5px;
         outline: none;
         font-size: 1.6rem;
@@ -39,4 +49,16 @@ const FormInputContainer = styled.div<IFormInputContainerProps>`
     }
 `;
 
-export { FormInputContainer };
+const InputMessageError = styled.div`
+    position: absolute;
+    top: -2rem;
+    left: 0;
+    width: 100%;
+    p {
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: var(--red);
+    }
+`;
+
+export { FormInputContainer, InputMessageError };
