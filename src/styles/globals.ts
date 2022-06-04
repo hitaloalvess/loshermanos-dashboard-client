@@ -47,7 +47,7 @@ export default createGlobalStyle`
     font: 1.4rem Roboto Slab, sans-serif;
   }
 
-  button {
+  button, a {
     cursor: pointer;
   }
   

@@ -28,7 +28,6 @@ export function setupClient(ctx = undefined) {
         (error: AxiosError<any>) => {
             if (error.response?.status === 401) {
                 if (error.response.data?.message === 'Invalid Token') {
-                    console.log(error.response.data);
                     const cookies = parseCookies(ctx);
                     const { '@LosHermanosDash.refreshToken': refreshToken } =
                         cookies;
