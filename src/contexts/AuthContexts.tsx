@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import router from 'next/router';
-import { setCookie } from 'nookies';
+import { destroyCookie, setCookie } from 'nookies';
 import { createContext, ReactNode, useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -21,11 +21,19 @@ interface IAuthProviderProps {
 
 interface IAuthContextData {
     signIn: (credentials: ISignInCredentials) => Promise<void>;
+    signOut: () => void;
     isAuthenticated: boolean;
     user: User;
 }
 
 export const AuthContext = createContext({} as IAuthContextData);
+
+export function signOut() {
+    destroyCookie(undefined, '@LosHermanosDash.token');
+    destroyCookie(undefined, '@LosHermanosDash.refreshToken');
+
+    router.push('/');
+}
 
 export function AuthProvider({ children }: IAuthProviderProps) {
     const [user, setUser] = useState<User>({} as User);
@@ -66,7 +74,9 @@ export function AuthProvider({ children }: IAuthProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ signIn, isAuthenticated, user }}>
+        <AuthContext.Provider
+            value={{ signIn, signOut, isAuthenticated, user }}
+        >
             {children}
         </AuthContext.Provider>
     );
