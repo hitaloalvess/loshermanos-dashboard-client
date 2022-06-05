@@ -8,6 +8,9 @@ import { apiAuth } from '../services/apiClient';
 
 type User = {
     username: string;
+    name: string;
+    email: string;
+    telefone: string;
 };
 
 interface ISignInCredentials {
@@ -63,7 +66,12 @@ export function AuthProvider({ children }: IAuthProviderProps) {
                 },
             );
 
-            setUser({ username });
+            setUser({
+                name: response.data.user.name,
+                email: response.data.user.email,
+                username: response.data.user.username,
+                telefone: response.data.user.telefone,
+            });
 
             apiAuth.defaults.headers.common.Authorization = `Bearer ${token}`;
 

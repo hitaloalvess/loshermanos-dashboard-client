@@ -1,3 +1,9 @@
+import { PageContainer } from '../../components';
+
 export default function Dashboard() {
-    return <h1>Dashboard</h1>;
+    return (
+        <PageContainer>
+            <></>
+        </PageContainer>
+    );
 }
