@@ -1,22 +1,22 @@
 import { PencilSimple, Trash } from 'phosphor-react';
 
+import { User } from '../../../@types';
 import { Button } from '../../Buttons';
 import { TableBody, TableContainer, TableHead, TableRow } from '../styles';
 
-type bodyContentType = {
-    data: {
-        [key: string]: string;
-    };
-    buttonEdit: () => void;
-    buttonDelete: () => void;
-};
-
 interface ITableProps {
     headerContent: string[];
-    bodyContent: bodyContentType[];
+    bodyContent: User[];
+    funActiveModalDelete: (user: User) => void;
+    funActiveModalUpdate: (user: User) => void;
 }
 
-function TableUsers({ headerContent, bodyContent }: ITableProps) {
+function TableUsers({
+    headerContent,
+    bodyContent,
+    funActiveModalDelete,
+    funActiveModalUpdate,
+}: ITableProps) {
     return (
         <TableContainer>
             <TableHead>
@@ -27,38 +27,47 @@ function TableUsers({ headerContent, bodyContent }: ITableProps) {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {bodyContent.map((bodyItem, index) => (
-                    <TableRow key={index}>
-                        <td>{bodyItem.data.name}</td>
-                        <td>{bodyItem.data.office}</td>
-                        <td>{bodyItem.data.email}</td>
-                        <td>{bodyItem.data.telefone}</td>
-                        <td>{bodyItem.data.data}</td>
-                        <td className="buttons">
-                            {
-                                <>
-                                    <Button
-                                        type="edit"
-                                        onClick={() => bodyItem.buttonEdit()}
-                                    >
-                                        <>
-                                            <PencilSimple />
-                                        </>
-                                    </Button>
+                {bodyContent &&
+                    bodyContent.map(bodyItem => (
+                        <TableRow key={bodyItem.id}>
+                            <td>{bodyItem.name}</td>
+                            <td>{bodyItem.username}</td>
+                            <td>{bodyItem.role.name}</td>
+                            <td>{bodyItem.email}</td>
+                            <td>{bodyItem.telefone}</td>
+                            <td className="buttons">
+                                {
+                                    <>
+                                        <Button
+                                            type="edit"
+                                            onClick={() =>
+                                                funActiveModalUpdate(
+                                                    bodyItem as User,
+                                                )
+                                            }
+                                        >
+                                            <>
+                                                <PencilSimple />
+                                            </>
+                                        </Button>
 
-                                    <Button
-                                        type="delete"
-                                        onClick={() => bodyItem.buttonDelete()}
-                                    >
-                                        <>
-                                            <Trash />
-                                        </>
-                                    </Button>
-                                </>
-                            }
-                        </td>
-                    </TableRow>
-                ))}
+                                        <Button
+                                            type="delete"
+                                            onClick={() =>
+                                                funActiveModalDelete(
+                                                    bodyItem as User,
+                                                )
+                                            }
+                                        >
+                                            <>
+                                                <Trash />
+                                            </>
+                                        </Button>
+                                    </>
+                                }
+                            </td>
+                        </TableRow>
+                    ))}
             </TableBody>
         </TableContainer>
     );

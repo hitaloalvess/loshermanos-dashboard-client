@@ -3,7 +3,7 @@ import { ReactElement } from 'react';
 import { ButtonContainer } from './styles';
 
 interface IButtonProps {
-    type: 'edit' | 'delete' | 'payment';
+    type?: 'edit' | 'delete' | 'payment' | 'cancel';
     onClick: (id?: string) => void;
     children: ReactElement;
 }

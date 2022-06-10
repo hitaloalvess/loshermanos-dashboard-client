@@ -1,17 +1,13 @@
 import { AxiosError } from 'axios';
+import decode from 'jwt-decode';
 import router from 'next/router';
-import { destroyCookie, setCookie } from 'nookies';
-import { createContext, ReactNode, useState } from 'react';
+import { destroyCookie, parseCookies, setCookie } from 'nookies';
+import { useEffect, createContext, ReactNode, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { apiAuth } from '../services/apiClient';
-
-type User = {
-    username: string;
-    name: string;
-    email: string;
-    telefone: string;
-};
+import { User } from '../@types';
+import { apiClient } from '../services/apiClient';
+import { extractUserDataCookie } from '../utils/extractUserDataCookie';
 
 interface ISignInCredentials {
     username: string;
@@ -39,17 +35,20 @@ export function signOut() {
 }
 
 export function AuthProvider({ children }: IAuthProviderProps) {
-    const [user, setUser] = useState<User>({} as User);
+    const [user, setUser] = useState<User>(() => {
+        const { user } = extractUserDataCookie('@LosHermanosDash.token');
+        return user;
+    });
     const isAuthenticated = !!user;
 
     async function signIn({ username, password }: ISignInCredentials) {
         try {
-            const response = await apiAuth.post('/session', {
+            const response = await apiClient.post('/session', {
                 username,
                 password,
             });
 
-            const { token, refreshToken } = response.data;
+            const { token, refresh_token } = response.data;
 
             setCookie(undefined, '@LosHermanosDash.token', token, {
                 maxAge: 60 * 60 * 24 * 7, // 7 days
@@ -59,7 +58,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
             setCookie(
                 undefined,
                 '@LosHermanosDash.refreshToken',
-                refreshToken,
+                refresh_token,
                 {
                     maxAge: 60 * 60 * 24 * 30, // 30 days
                     path: '/',
@@ -71,9 +70,15 @@ export function AuthProvider({ children }: IAuthProviderProps) {
                 email: response.data.user.email,
                 username: response.data.user.username,
                 telefone: response.data.user.telefone,
+                role: {
+                    id: response.data.user.role.id,
+                    name: response.data.user.role.name,
+                    description: response.data.user.role.description,
+                },
+                id_account: response.data.user.id_account,
             });
 
-            apiAuth.defaults.headers.common.Authorization = `Bearer ${token}`;
+            apiClient.defaults.headers.common.Authorization = `Bearer ${token}`;
 
             router.push('/dashboard');
         } catch (error: any) {

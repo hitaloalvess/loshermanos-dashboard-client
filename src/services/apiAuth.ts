@@ -1,7 +1,8 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import { GetServerSidePropsContext } from 'next';
 import { parseCookies, setCookie } from 'nookies';
 
-import { apiAuth } from './apiClient';
+import { apiClient } from './apiClient';
 
 type FailedRequestQueueType = {
     onSuccess: (token: string) => void;
@@ -11,15 +12,14 @@ type FailedRequestQueueType = {
 let isRefreshing = false;
 let failedRequestsQueue: FailedRequestQueueType[] = [];
 
-export function setupClient(ctx = undefined) {
+export function setupClient(ctx?: GetServerSidePropsContext) {
     const cookies = parseCookies(ctx);
 
     const api = axios.create({
         baseURL: process.env.BASE_URL,
-        headers: {
-            Authorization: `Bearer ${cookies['@LosHermanosDash.token']}`,
-        },
     });
+
+    api.defaults.headers.common.Authorization = `Bearer ${cookies['@LosHermanosDash.token']}`;
 
     api.interceptors.response.use(
         response => {
@@ -27,20 +27,20 @@ export function setupClient(ctx = undefined) {
         },
         (error: AxiosError<any>) => {
             if (error.response?.status === 401) {
-                if (error.response.data?.message === 'Invalid Token') {
+                if (error.response.data?.message === 'Invalid token') {
                     const cookies = parseCookies(ctx);
                     const { '@LosHermanosDash.refreshToken': refreshToken } =
                         cookies;
 
-                    const originalConfig: AxiosRequestConfig = error.config;
+                    const originalConfig = error.config;
 
                     if (!isRefreshing) {
                         isRefreshing = true;
 
-                        apiAuth
-                            .post('/refreshToken', { refreshToken })
+                        apiClient
+                            .post('/refresh_token', { token: refreshToken })
                             .then(response => {
-                                const { token } = response.data;
+                                const { token, refresh_token } = response.data;
 
                                 setCookie(
                                     undefined,
@@ -55,7 +55,7 @@ export function setupClient(ctx = undefined) {
                                 setCookie(
                                     undefined,
                                     '@LosHermanosDash.refreshToken',
-                                    refreshToken,
+                                    refresh_token,
                                     {
                                         maxAge: 60 * 60 * 24 * 30, // 30 days
                                         path: '/',
@@ -86,6 +86,8 @@ export function setupClient(ctx = undefined) {
                                 if (originalConfig.headers) {
                                     originalConfig.headers.Authorization = `Bearer ${token}`;
                                 }
+
+                                resolve(apiClient(originalConfig));
                             },
                             onFailure: (error: AxiosError) => {
                                 reject(error);

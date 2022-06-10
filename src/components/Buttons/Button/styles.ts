@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 interface IButtonContainerProps {
-    typeButton: 'edit' | 'delete' | 'payment';
+    typeButton?: 'edit' | 'delete' | 'payment' | 'cancel';
 }
 
 const ButtonContainer = styled.button<IButtonContainerProps>`
     display: inline-flex;
+    align-items: center;
     gap: 0 0.4rem;
     padding: 0.8rem 1.2rem;
     font-size: 1.2rem;
@@ -23,6 +24,8 @@ const ButtonContainer = styled.button<IButtonContainerProps>`
 
             case 'payment':
                 return `var(--green)`;
+            case 'cancel':
+                return `var(--dark-surface-secondary)`;
 
             default:
                 return `var(--orange)`;
@@ -33,6 +36,10 @@ const ButtonContainer = styled.button<IButtonContainerProps>`
     svg {
         width: 1.6rem;
         height: 1.6rem;
+    }
+
+    p {
+        font-size: 1.4rem;
     }
 
     &:hover {

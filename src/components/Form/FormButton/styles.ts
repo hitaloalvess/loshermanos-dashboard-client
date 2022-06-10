@@ -6,6 +6,7 @@ const FormButtonContainer = styled.button`
     font-size: 1.6rem;
     font-weight: 700;
     text-align: center;
+    border: none;
     border-radius: 5px;
     color: var(--white);
     background-color: var(--orange);

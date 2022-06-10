@@ -7,7 +7,7 @@ interface IButtonContainer {
 }
 
 function FormButton({ children }: IButtonContainer) {
-    return <FormButtonContainer>{children}</FormButtonContainer>;
+    return <FormButtonContainer type="submit">{children}</FormButtonContainer>;
 }
 
 export { FormButton };

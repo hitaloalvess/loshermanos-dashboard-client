@@ -1,12 +1,19 @@
+import { FieldError } from 'react-hook-form';
 import styled from 'styled-components';
 
-const InputSelectContainer = styled.div`
+interface IInputSelectProps {
+    error?: FieldError;
+}
+
+const InputSelectContainer = styled.div<IInputSelectProps>`
     position: relative;
+
     select {
         width: 100%;
-        padding: 2.4rem 1.8rem;
+        padding: 1.6rem 2.4rem;
         color: var(--text-secondary);
-        border: 3px solid transparent;
+        border: ${props =>
+            props.error ? `3px solid var(--red)` : `3px solid transparent`};
         border-radius: 5px;
         appearance: none;
         background-color: var(--dark-surface-primary);
@@ -16,7 +23,7 @@ const InputSelectContainer = styled.div`
         &:checked,
         &:focus {
             border-color: var(--orange);
-
+            cursor: pointer;
             & + svg {
                 color: var(--orange);
             }
@@ -25,12 +32,30 @@ const InputSelectContainer = styled.div`
 
     svg {
         position: absolute;
-        top: 2.4rem;
+        top: 2rem;
         right: 2.4rem;
         width: 1.8rem;
         height: 1.8rem;
         color: var(--text-secondary);
+
+        &.iconAlert {
+            margin-left: auto;
+            right: 4.8rem;
+            color: var(--red);
+        }
     }
 `;
 
-export { InputSelectContainer };
+const InputSelectMessageError = styled.div`
+    position: absolute;
+    top: -2rem;
+    left: 0;
+    width: 100%;
+    p {
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: var(--red);
+    }
+`;
+
+export { InputSelectContainer, InputSelectMessageError };

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const TableContainer = styled.table`
-    width: 90%;
+    width: 100%;
     border-spacing: 0 1.2rem;
     background-color: transparent;
 `;
@@ -25,7 +25,7 @@ const TableRow = styled.tr`
     td {
         font-size: 1.4rem;
         text-align: center;
-        padding: 2.4rem 0;
+        padding: 1.6rem 0;
 
         &:first-child {
             border-radius: 8px 0 0 8px;

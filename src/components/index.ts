@@ -4,3 +4,4 @@ export * from './SideBar';
 export * from './PageContainer';
 export * from './Tables';
 export * from './Buttons';
+export * from './Modal';

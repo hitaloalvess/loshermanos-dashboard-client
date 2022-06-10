@@ -5,12 +5,11 @@ import { SideBar } from '../SideBar';
 import { Container, Content, ContentContainer, Header } from './styles';
 
 interface IPageContainerProps {
+    userName: string;
     children: ReactElement;
 }
 
-function PageContainer({ children }: IPageContainerProps) {
-    const { user } = useContext(AuthContext);
-
+function PageContainer({ userName, children }: IPageContainerProps) {
     return (
         <Container>
             <SideBar />
@@ -19,7 +18,7 @@ function PageContainer({ children }: IPageContainerProps) {
                     <div className="welcome">
                         <p>
                             Seja bem-vindo
-                            <span>{user.name}</span>
+                            <span>{userName}</span>
                         </p>
                     </div>
                 </Header>
