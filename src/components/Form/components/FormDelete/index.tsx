@@ -1,4 +1,4 @@
-import { Button } from '../../Buttons';
+import { Button } from '../../../Buttons';
 import {
     FormDeleteActions,
     FormDeleteContainer,

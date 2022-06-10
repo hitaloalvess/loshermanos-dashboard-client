@@ -7,8 +7,8 @@ import { toast } from 'react-toastify';
 import * as yup from 'yup';
 
 import { api } from '../../../services/api';
-import { FormButton } from '../FormButton';
-import { FormInput } from '../FormInput';
+import { FormButton } from '../components/FormButton';
+import { FormInput } from '../components/FormInput';
 import {
     FormSignUpBackButton,
     FormSignUpContainer,

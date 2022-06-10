@@ -13,7 +13,7 @@ import {
     PageContainer,
     TableUsers,
 } from '../../components';
-import { FormDelete } from '../../components/Form/FormDelete';
+import { FormDelete } from '../../components/Form/components/FormDelete';
 import { getUsersServerSide, useUsers } from '../../hooks/useUsers';
 import { apiClient } from '../../services/apiClient';
 import { queryClient } from '../../services/queryClient';

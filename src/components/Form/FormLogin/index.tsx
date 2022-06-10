@@ -5,8 +5,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 import { AuthContext } from '../../../contexts/AuthContexts';
-import { FormButton } from '../FormButton';
-import { FormInput } from '../FormInput';
+import { FormButton } from '../components/FormButton';
+import { FormInput } from '../components/FormInput';
 import { FormLoginContainer, FormLoginTitle, RegisterNow } from './styles';
 
 interface IUserData {

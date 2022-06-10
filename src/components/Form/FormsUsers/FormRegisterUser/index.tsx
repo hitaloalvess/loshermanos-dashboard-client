@@ -1,24 +1,28 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { AxiosResponse } from 'axios';
 import router from 'next/router';
+import { parseCookies } from 'nookies';
+import { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 
-import { Role, User } from '../../../@types';
-import { useRoles } from '../../../hooks/useRoles';
-import { apiClient } from '../../../services/apiClient';
-import { queryClient } from '../../../services/queryClient';
-import { FormButton } from '../FormButton';
-import { FormInput } from '../FormInput';
-import { FormInputSelect } from '../FormInputSelect';
+import { Role } from '../../../../@types';
+import { AuthContext } from '../../../../contexts/AuthContexts';
+import { useRoles } from '../../../../hooks/useRoles';
+import { apiClient } from '../../../../services/apiClient';
+import { queryClient } from '../../../../services/queryClient';
+import { FormButton } from '../../components/FormButton';
+import { FormInput } from '../../components/FormInput';
+import { FormInputSelect } from '../../components/FormInputSelect';
 import {
     FormRegisterUserContainer,
     FormRegisterUserRow,
     FormRegisterUserTitle,
 } from './styles';
 
-interface IUpdateUserFormData {
+interface IRegisterUserFormData {
     name: string;
     username: string;
     email: string;
@@ -30,45 +34,51 @@ interface IUpdateUserFormData {
 }
 
 interface IFormRegisterProps {
-    user: User;
     funCloseModal: () => void;
 }
 
-const updateUserFormSchema = yup.object({
+const registerUserFormSchema = yup.object({
     name: yup.string().required('Nome é obrigatório'),
     username: yup.string().required('Username é obrigatório'),
     email: yup
         .string()
         .required('E-mail é obrigatório')
         .email('E-mail inválido'),
+    password: yup.string().required('Senha obrigatória'),
+    password_confirmation: yup
+        .string()
+        .oneOf([null, yup.ref('password')], 'As senhas devem ser iguais'),
     telefone: yup.string().required('Telefone é obrigatório'),
     id_role: yup.string().required('Cargo é obrigatório'),
 });
 
-function FormUpdateUser({ user, funCloseModal }: IFormRegisterProps) {
+function FormRegisterUser({ funCloseModal }: IFormRegisterProps) {
+    const { user } = useContext(AuthContext);
+
     const { data } = useRoles(user.id_account);
 
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<IUpdateUserFormData>({
-        resolver: yupResolver(updateUserFormSchema),
+    } = useForm<IRegisterUserFormData>({
+        resolver: yupResolver(registerUserFormSchema),
     });
 
-    const update = useMutation(
+    const create = useMutation(
         async ({
             name,
             email,
             username,
+            password,
             id_role,
             telefone,
-        }: IUpdateUserFormData) => {
-            const response = await apiClient.put(`/users/${user.id}`, {
+        }: IRegisterUserFormData) => {
+            const response = await apiClient.post('/users', {
                 name,
                 email,
                 username,
-                password: user.password,
+                password,
                 telefone,
                 id_role,
                 id_account: user.id_account,
@@ -81,12 +91,12 @@ function FormUpdateUser({ user, funCloseModal }: IFormRegisterProps) {
         },
     );
 
-    const handleUpdateUser: SubmitHandler<
-        IUpdateUserFormData
+    const handleRegisterUser: SubmitHandler<
+        IRegisterUserFormData
     > = async values => {
         try {
-            await update.mutateAsync(values);
-            toast.success('Usuário atualizado com sucesso!');
+            await create.mutateAsync(values);
+            toast.success('Usuário cadastrado com sucesso!');
             router.push('/users');
             funCloseModal();
         } catch (error: any) {
@@ -96,18 +106,16 @@ function FormUpdateUser({ user, funCloseModal }: IFormRegisterProps) {
 
     return (
         <FormRegisterUserContainer>
-            <FormRegisterUserTitle>Atualizar usuário</FormRegisterUserTitle>
+            <FormRegisterUserTitle>Cadatrar usuário</FormRegisterUserTitle>
 
-            <form onSubmit={handleSubmit(handleUpdateUser)}>
+            <form onSubmit={handleSubmit(handleRegisterUser)}>
                 <FormRegisterUserRow countItens={2}>
                     <FormInput
-                        defaultValue={user.name}
                         placeholder="Nome"
                         error={errors.name}
                         {...register('name')}
                     />
                     <FormInput
-                        defaultValue={user.username}
                         placeholder="Username"
                         error={errors.username}
                         {...register('username')}
@@ -116,7 +124,6 @@ function FormUpdateUser({ user, funCloseModal }: IFormRegisterProps) {
 
                 <FormRegisterUserRow countItens={1}>
                     <FormInput
-                        defaultValue={user.email}
                         type="email"
                         placeholder="E-mail"
                         error={errors.email}
@@ -125,15 +132,27 @@ function FormUpdateUser({ user, funCloseModal }: IFormRegisterProps) {
                 </FormRegisterUserRow>
 
                 <FormRegisterUserRow countItens={2}>
+                    <FormInput
+                        type="password"
+                        placeholder="Senha"
+                        error={errors.password}
+                        {...register('password')}
+                    />
+                    <FormInput
+                        placeholder="Confirmar senha"
+                        error={errors.password_confirmation}
+                        {...register('password_confirmation')}
+                    />
+                </FormRegisterUserRow>
+
+                <FormRegisterUserRow countItens={2}>
                     <FormInputSelect
-                        defaultValue={user.role.id}
                         options={data as Role[]}
                         error={errors.id_role}
                         {...register('id_role')}
                     />
 
                     <FormInput
-                        defaultValue={user.telefone}
                         placeholder="Telefone"
                         error={errors.telefone}
                         {...register('telefone')}
@@ -141,11 +160,11 @@ function FormUpdateUser({ user, funCloseModal }: IFormRegisterProps) {
                 </FormRegisterUserRow>
 
                 <FormButton>
-                    <p>Atualizar</p>
+                    <p>Cadastrar</p>
                 </FormButton>
             </form>
         </FormRegisterUserContainer>
     );
 }
 
-export { FormUpdateUser };
+export { FormRegisterUser };
