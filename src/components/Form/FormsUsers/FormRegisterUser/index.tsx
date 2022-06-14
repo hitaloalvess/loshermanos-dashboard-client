@@ -1,7 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { AxiosResponse } from 'axios';
 import router from 'next/router';
-import { parseCookies } from 'nookies';
 import { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
@@ -16,11 +14,7 @@ import { queryClient } from '../../../../services/queryClient';
 import { FormButton } from '../../components/FormButton';
 import { FormInput } from '../../components/FormInput';
 import { FormInputSelect } from '../../components/FormInputSelect';
-import {
-    FormRegisterUserContainer,
-    FormRegisterUserRow,
-    FormRegisterUserTitle,
-} from './styles';
+import { FormContainer, FormRow, FormTitle } from '../../styles';
 
 interface IRegisterUserFormData {
     name: string;
@@ -105,11 +99,11 @@ function FormRegisterUser({ funCloseModal }: IFormRegisterProps) {
     };
 
     return (
-        <FormRegisterUserContainer>
-            <FormRegisterUserTitle>Cadatrar usuário</FormRegisterUserTitle>
+        <FormContainer>
+            <FormTitle>Cadatrar usuário</FormTitle>
 
             <form onSubmit={handleSubmit(handleRegisterUser)}>
-                <FormRegisterUserRow countItens={2}>
+                <FormRow countItens={2}>
                     <FormInput
                         placeholder="Nome"
                         error={errors.name}
@@ -120,18 +114,18 @@ function FormRegisterUser({ funCloseModal }: IFormRegisterProps) {
                         error={errors.username}
                         {...register('username')}
                     />
-                </FormRegisterUserRow>
+                </FormRow>
 
-                <FormRegisterUserRow countItens={1}>
+                <FormRow countItens={1}>
                     <FormInput
                         type="email"
                         placeholder="E-mail"
                         error={errors.email}
                         {...register('email')}
                     />
-                </FormRegisterUserRow>
+                </FormRow>
 
-                <FormRegisterUserRow countItens={2}>
+                <FormRow countItens={2}>
                     <FormInput
                         type="password"
                         placeholder="Senha"
@@ -143,9 +137,9 @@ function FormRegisterUser({ funCloseModal }: IFormRegisterProps) {
                         error={errors.password_confirmation}
                         {...register('password_confirmation')}
                     />
-                </FormRegisterUserRow>
+                </FormRow>
 
-                <FormRegisterUserRow countItens={2}>
+                <FormRow countItens={2}>
                     <FormInputSelect
                         options={data as Role[]}
                         error={errors.id_role}
@@ -157,13 +151,13 @@ function FormRegisterUser({ funCloseModal }: IFormRegisterProps) {
                         error={errors.telefone}
                         {...register('telefone')}
                     />
-                </FormRegisterUserRow>
+                </FormRow>
 
                 <FormButton>
                     <p>Cadastrar</p>
                 </FormButton>
             </form>
-        </FormRegisterUserContainer>
+        </FormContainer>
     );
 }
 

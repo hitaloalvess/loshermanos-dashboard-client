@@ -19,6 +19,20 @@ type Role = {
     description: string;
 };
 
+type Customer = {
+    id?: string;
+    name: string;
+    cpf: string;
+    road: string;
+    district: string;
+    number: string;
+    city: string;
+    phone: string;
+    zip_code: string;
+    created_at?: string;
+    id_account: string;
+};
+
 interface IPayload {
     name: string;
     email: string;
@@ -32,4 +46,4 @@ interface IPayload {
     id_account: string;
 }
 
-export { User, Role, IPayload };
+export { User, Role, Customer, IPayload };

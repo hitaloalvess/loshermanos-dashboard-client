@@ -12,11 +12,7 @@ import { queryClient } from '../../../../services/queryClient';
 import { FormButton } from '../../components/FormButton';
 import { FormInput } from '../../components/FormInput';
 import { FormInputSelect } from '../../components/FormInputSelect';
-import {
-    FormRegisterUserContainer,
-    FormRegisterUserRow,
-    FormRegisterUserTitle,
-} from './styles';
+import { FormContainer, FormRow, FormTitle } from '../../styles';
 
 interface IUpdateUserFormData {
     name: string;
@@ -95,11 +91,11 @@ function FormUpdateUser({ user, funCloseModal }: IFormRegisterProps) {
     };
 
     return (
-        <FormRegisterUserContainer>
-            <FormRegisterUserTitle>Atualizar usuário</FormRegisterUserTitle>
+        <FormContainer>
+            <FormTitle>Atualizar usuário</FormTitle>
 
             <form onSubmit={handleSubmit(handleUpdateUser)}>
-                <FormRegisterUserRow countItens={2}>
+                <FormRow countItens={2}>
                     <FormInput
                         defaultValue={user.name}
                         placeholder="Nome"
@@ -112,9 +108,9 @@ function FormUpdateUser({ user, funCloseModal }: IFormRegisterProps) {
                         error={errors.username}
                         {...register('username')}
                     />
-                </FormRegisterUserRow>
+                </FormRow>
 
-                <FormRegisterUserRow countItens={1}>
+                <FormRow countItens={1}>
                     <FormInput
                         defaultValue={user.email}
                         type="email"
@@ -122,9 +118,9 @@ function FormUpdateUser({ user, funCloseModal }: IFormRegisterProps) {
                         error={errors.email}
                         {...register('email')}
                     />
-                </FormRegisterUserRow>
+                </FormRow>
 
-                <FormRegisterUserRow countItens={2}>
+                <FormRow countItens={2}>
                     <FormInputSelect
                         defaultValue={user.role.id}
                         options={data as Role[]}
@@ -138,13 +134,13 @@ function FormUpdateUser({ user, funCloseModal }: IFormRegisterProps) {
                         error={errors.telefone}
                         {...register('telefone')}
                     />
-                </FormRegisterUserRow>
+                </FormRow>
 
                 <FormButton>
                     <p>Atualizar</p>
                 </FormButton>
             </form>
-        </FormRegisterUserContainer>
+        </FormContainer>
     );
 }
 
