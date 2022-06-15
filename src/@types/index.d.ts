@@ -33,6 +33,15 @@ type Customer = {
     id_account: string;
 };
 
+type Product = {
+    id?: string;
+    description: string;
+    price: number;
+    image_name: string;
+    created_at?: string;
+    id_account: string;
+};
+
 interface IPayload {
     name: string;
     email: string;
@@ -46,4 +55,4 @@ interface IPayload {
     id_account: string;
 }
 
-export { User, Role, Customer, IPayload };
+export { User, Role, Customer, IPayload, Product };
