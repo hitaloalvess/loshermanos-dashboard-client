@@ -46,6 +46,7 @@ function FormLogin() {
                 </FormInput>
 
                 <FormInput
+                    type="password"
                     placeholder="Password"
                     {...register('password')}
                     error={errors.password}
