@@ -1,4 +1,5 @@
 import { GetServerSidePropsContext } from 'next';
+import { parseCookies } from 'nookies';
 import { useQuery, UseQueryResult } from 'react-query';
 
 import { User } from '../@types';
@@ -23,9 +24,14 @@ export async function getUsersServerSide(
     id_account: string,
     ctx: GetServerSidePropsContext,
 ): Promise<User[]> {
+    const { '@LosHermanosDash.token': token } = parseCookies();
     const api = setupClient(ctx);
 
-    const { data } = await api.get(`/users/${id_account}`);
+    const { data } = await api.get(`/users/${id_account}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
 
     const users: User[] = data.map((user: User) => {
         return { ...user };

@@ -1,6 +1,5 @@
-import { AxiosError } from 'axios';
-import decode from 'jwt-decode';
-import router from 'next/router';
+import { GetServerSidePropsContext, Redirect } from 'next';
+import Router from 'next/router';
 import { destroyCookie, parseCookies, setCookie } from 'nookies';
 import { useEffect, createContext, ReactNode, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -18,20 +17,46 @@ interface IAuthProviderProps {
     children: ReactNode;
 }
 
+interface IResponseSignOut {
+    redirect: {
+        destination: string;
+        permanent: boolean;
+    };
+}
+
 interface IAuthContextData {
     signIn: (credentials: ISignInCredentials) => Promise<void>;
-    signOut: () => void;
+    signOut: (
+        ctx?: GetServerSidePropsContext | undefined,
+    ) => IResponseSignOut | null;
     isAuthenticated: boolean;
     user: User;
 }
 
+interface ISignOutProps {
+    ctx?: GetServerSidePropsContext | undefined;
+}
+
 export const AuthContext = createContext({} as IAuthContextData);
 
-export function signOut() {
+export function signOut(
+    ctx: GetServerSidePropsContext | undefined = undefined,
+) {
     destroyCookie(undefined, '@LosHermanosDash.token');
     destroyCookie(undefined, '@LosHermanosDash.refreshToken');
 
-    router.push('/');
+    if (!ctx) {
+        Router.push('/');
+    } else {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        };
+    }
+
+    return null;
 }
 
 export function AuthProvider({ children }: IAuthProviderProps) {
@@ -80,9 +105,9 @@ export function AuthProvider({ children }: IAuthProviderProps) {
 
             apiClient.defaults.headers.common.Authorization = `Bearer ${token}`;
 
-            router.push('/dashboard');
+            Router.push('/dashboard');
         } catch (error: any) {
-            toast.error(error.response.data.message);
+            toast.error(error.response.data?.message);
         }
     }
 

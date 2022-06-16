@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { GetServerSidePropsContext } from 'next';
 import { parseCookies, setCookie } from 'nookies';
 
-import { apiClient } from './apiClient';
+import { signOut } from '../contexts/AuthContexts';
 
 type FailedRequestQueueType = {
     onSuccess: (token: string) => void;
@@ -37,13 +37,12 @@ export function setupClient(ctx?: GetServerSidePropsContext) {
                     if (!isRefreshing) {
                         isRefreshing = true;
 
-                        apiClient
-                            .post('/refresh_token', { token: refreshToken })
+                        api.post('/refresh_token', { token: refreshToken })
                             .then(response => {
                                 const { token, refresh_token } = response.data;
 
                                 setCookie(
-                                    undefined,
+                                    ctx,
                                     '@LosHermanosDash.token',
                                     token,
                                     {
@@ -53,7 +52,7 @@ export function setupClient(ctx?: GetServerSidePropsContext) {
                                 );
 
                                 setCookie(
-                                    undefined,
+                                    ctx,
                                     '@LosHermanosDash.refreshToken',
                                     refresh_token,
                                     {
@@ -74,6 +73,8 @@ export function setupClient(ctx?: GetServerSidePropsContext) {
                                     request.onFailure(error),
                                 );
                                 failedRequestsQueue = [];
+
+                                signOut(ctx);
                             })
                             .finally(() => {
                                 isRefreshing = false;
@@ -87,7 +88,7 @@ export function setupClient(ctx?: GetServerSidePropsContext) {
                                     originalConfig.headers.Authorization = `Bearer ${token}`;
                                 }
 
-                                resolve(apiClient(originalConfig));
+                                resolve(api(originalConfig));
                             },
                             onFailure: (error: AxiosError) => {
                                 reject(error);
@@ -95,6 +96,8 @@ export function setupClient(ctx?: GetServerSidePropsContext) {
                         });
                     });
                 }
+            } else {
+                signOut(ctx);
             }
 
             return Promise.reject(error);

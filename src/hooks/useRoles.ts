@@ -6,19 +6,13 @@ import { setupClient } from '../services/apiAuth';
 import { apiClient } from '../services/apiClient';
 
 export async function getRoles(id_account: string): Promise<Role[]> {
-    try {
-        const { data } = await apiClient.get(`/role/${id_account}`);
+    const { data } = await apiClient.get(`/role/${id_account}`);
 
-        const roles: Role[] = data.map((role: Role) => {
-            return { ...role };
-        });
+    const roles: Role[] = data.map((role: Role) => {
+        return { ...role };
+    });
 
-        return roles;
-    } catch {
-        console.log('ERRO DENTRO DO GETROLES');
-    }
-
-    return [];
+    return roles;
 }
 
 export async function getRolesServerSide(
