@@ -52,10 +52,6 @@ export default function Customers({ customers, loggedUser }: ICustomers) {
         },
     );
 
-    const closeModalRegister = useCallback(() => {
-        setIsOpenRegisterModal(false);
-    }, [isOpenRegisterModal]);
-
     const activeDeleteModal = useCallback(
         (customer: Customer) => {
             setCustomerSelected(customer);
@@ -86,6 +82,16 @@ export default function Customers({ customers, loggedUser }: ICustomers) {
         },
         [customerSelected],
     );
+
+    const closeModalRegister = useCallback(() => {
+        setIsOpenRegisterModal(false);
+        setCustomerSelected({} as Customer);
+    }, [isOpenRegisterModal, customerSelected]);
+
+    const funCloseDeleteModal = useCallback(() => {
+        setIsOpenDeleteModal(false);
+        setCustomerSelected({} as Customer);
+    }, [isOpenDeleteModal, customerSelected]);
 
     return (
         <PageContainer userName={loggedUser.name}>
@@ -135,7 +141,7 @@ export default function Customers({ customers, loggedUser }: ICustomers) {
                     <FormDelete
                         title="Excluir cliente"
                         subtitle="Tem certeza que deseja excluir esse cliente?"
-                        funCancelButton={() => setIsOpenDeleteModal(false)}
+                        funCancelButton={funCloseDeleteModal}
                         funDeleteButton={() =>
                             handleDeleteCustomer(customerSelected.id as string)
                         }

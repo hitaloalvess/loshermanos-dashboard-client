@@ -50,15 +50,15 @@ export default function Users({ loggedUser, users }: IUsersProps) {
         },
     );
 
-    const closeModalRegister = useCallback(() => {
+    const closeRegisterModal = useCallback(() => {
         setIsOpenRegisterModal(false);
     }, [isOpenRegisterModal]);
 
-    const closeModalUpdate = useCallback(() => {
+    const closeUpdateModal = useCallback(() => {
         setIsOpenUpdateModal(false);
     }, [isOpenUpdateModal]);
 
-    const activeModalDelete = useCallback(
+    const activeDeleteModal = useCallback(
         (user: User) => {
             setUserSelected(user);
             setIsOpenDeleteModal(true);
@@ -111,17 +111,17 @@ export default function Users({ loggedUser, users }: IUsersProps) {
                             'Telefone',
                         ]}
                         bodyContent={data as User[]}
-                        funActiveModalDelete={activeModalDelete}
+                        funActiveModalDelete={activeDeleteModal}
                         funActiveModalUpdate={activeUpdateModal}
                     />
                 </ContentUsers>
 
                 <ModalContainer
                     isOpen={isOpenRegisterModal}
-                    funCloseModal={() => closeModalRegister()}
+                    funCloseModal={() => closeRegisterModal()}
                 >
                     <FormRegisterUser
-                        funCloseModal={() => closeModalRegister()}
+                        funCloseModal={() => closeRegisterModal()}
                     />
                 </ModalContainer>
 
@@ -141,11 +141,11 @@ export default function Users({ loggedUser, users }: IUsersProps) {
 
                 <ModalContainer
                     isOpen={isOpenUpdateModal}
-                    funCloseModal={() => closeModalUpdate()}
+                    funCloseModal={() => closeUpdateModal()}
                 >
                     <FormUpdateUser
                         user={userSelected}
-                        funCloseModal={() => closeModalUpdate()}
+                        funCloseModal={() => closeUpdateModal()}
                     />
                 </ModalContainer>
             </>

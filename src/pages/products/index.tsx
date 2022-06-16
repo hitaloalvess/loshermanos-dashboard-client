@@ -67,7 +67,7 @@ export default function Products({ loggedUser, products }: IProductsProps) {
         [productSelected],
     );
 
-    const funUpdateProduct = useCallback(
+    const activeUpdateModal = useCallback(
         (product: Product) => {
             setProductSelected(product);
             setIsOpenUpdateModal(true);
@@ -75,7 +75,7 @@ export default function Products({ loggedUser, products }: IProductsProps) {
         [productSelected, isOpenUpdateModal],
     );
 
-    const funDeleteProduct = useCallback(
+    const activeDeleteModal = useCallback(
         (product: Product) => {
             setProductSelected(product);
             setIsOpenDeleteModal(true);
@@ -108,8 +108,8 @@ export default function Products({ loggedUser, products }: IProductsProps) {
                     </ContentProductsHeader>
                     <ProductsList
                         products={data as Product[]}
-                        funUpdateProduct={funUpdateProduct}
-                        funDeleteProduct={funDeleteProduct}
+                        funUpdateProduct={activeUpdateModal}
+                        funDeleteProduct={activeDeleteModal}
                     />
                 </ContentProducts>
 
