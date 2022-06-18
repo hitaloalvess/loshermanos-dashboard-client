@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const ContentProducts = styled.main`
     display: flex;
     flex-direction: column;
-    gap: 4.4rem 0;
+    gap: 2.4rem 0;
 `;
 
 const ContentProductsHeader = styled.header`
@@ -17,4 +17,8 @@ const ContentProductsHeader = styled.header`
     }
 `;
 
-export { ContentProducts, ContentProductsHeader };
+const ContentActions = styled.div`
+    display: flex;
+`;
+
+export { ContentProducts, ContentProductsHeader, ContentActions };

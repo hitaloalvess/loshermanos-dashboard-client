@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { Plus } from 'phosphor-react';
-import { useCallback, useEffect, useState } from 'react';
-import { useMutation } from 'react-query';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useInfiniteQuery, useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 
 import { Product, User } from '../../@types';
@@ -14,19 +14,34 @@ import {
     PageContainer,
 } from '../../components';
 import { ProductsList } from '../../components/ProductsList';
-import { getProductsServerSide, useProducts } from '../../hooks/useProducts';
 import { apiClient } from '../../services/apiClient';
 import { queryClient } from '../../services/queryClient';
 import { extractUserDataCookie } from '../../utils/extractUserDataCookie';
 import { withSSRAuth } from '../../utils/withSSRAuth';
-import { ContentProducts, ContentProductsHeader } from './styles';
+import {
+    ContentActions,
+    ContentProducts,
+    ContentProductsHeader,
+} from './styles';
 
 interface IProductsProps {
     loggedUser: User;
-    products: Product[];
 }
 
-export default function Products({ loggedUser, products }: IProductsProps) {
+interface IResponse {
+    next?: {
+        page: number;
+        limit: number;
+    };
+    previous?: {
+        page: number;
+        limit: number;
+    };
+    totalPage?: number;
+    data?: Product[];
+}
+
+export default function Products({ loggedUser }: IProductsProps) {
     const [isOpenRegisterModal, setIsOpenRegisterModal] =
         useState<boolean>(false);
     const [isOpenUpdateModal, setIsOpenUpdateModal] = useState<boolean>(false);
@@ -35,12 +50,39 @@ export default function Products({ loggedUser, products }: IProductsProps) {
         {} as Product,
     );
 
-    const { data, isLoading, isFetching, isError } = useProducts(
-        loggedUser.id_account,
-        {
-            products,
+    async function fetchProducts({ pageParam = 1 }) {
+        const { data } = await apiClient.get(
+            `/products/${loggedUser.id_account}`,
+            {
+                params: {
+                    page: pageParam,
+                    limit: 10,
+                },
+            },
+        );
+        return data;
+    }
+
+    const {
+        data,
+        error,
+        isLoading,
+        fetchNextPage,
+        isFetchingNextPage,
+        hasNextPage,
+    } = useInfiniteQuery<IResponse>('products', fetchProducts, {
+        getNextPageParam: lastPage => {
+            return lastPage.next?.page || undefined;
         },
-    );
+    });
+
+    const formattedData = useMemo(() => {
+        const products = data?.pages?.flatMap(item => [
+            ...(item.data as Product[]),
+        ]);
+
+        return products;
+    }, [data]);
 
     const deleteProduct = useMutation(
         async (productId: string) => {
@@ -107,10 +149,21 @@ export default function Products({ loggedUser, products }: IProductsProps) {
                         </Button>
                     </ContentProductsHeader>
                     <ProductsList
-                        products={data as Product[]}
+                        products={formattedData as Product[]}
                         funUpdateProduct={activeUpdateModal}
                         funDeleteProduct={activeDeleteModal}
                     />
+
+                    {hasNextPage && (
+                        <ContentActions>
+                            <Button
+                                type="cancel"
+                                onClick={() => fetchNextPage()}
+                            >
+                                <p> Ver mais </p>
+                            </Button>
+                        </ContentActions>
+                    )}
                 </ContentProducts>
 
                 <ModalContainer
@@ -153,12 +206,9 @@ export default function Products({ loggedUser, products }: IProductsProps) {
 export const getServerSideProps: GetServerSideProps = withSSRAuth(async ctx => {
     const { user } = extractUserDataCookie('@LosHermanosDash.token', ctx);
 
-    const products = await getProductsServerSide(user.id_account, ctx);
-
     return {
         props: {
             loggedUser: { ...user },
-            products,
         },
     };
 });
