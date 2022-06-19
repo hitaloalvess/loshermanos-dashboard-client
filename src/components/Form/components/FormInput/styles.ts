@@ -4,11 +4,12 @@ import styled from 'styled-components';
 interface IFormInputContainerProps {
     hasIcon?: boolean;
     error?: FieldError;
+    disabled?: boolean;
 }
 
 const FormInputContainer = styled.div<IFormInputContainerProps>`
     position: relative;
-    display: flex;
+    display: ${props => (props.disabled ? 'none' : 'flex')};
     align-items: center;
     width: 100%;
     border-radius: 5px;

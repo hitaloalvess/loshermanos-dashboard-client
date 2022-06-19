@@ -28,7 +28,11 @@ const FormInputBase: ForwardRefRenderFunction<HTMLInputElement, IFormInput> = (
     ref,
 ) => {
     return (
-        <FormInputContainer hasIcon={!!children} error={error}>
+        <FormInputContainer
+            disabled={disabled}
+            hasIcon={!!children}
+            error={error}
+        >
             {children}
             <input
                 name={name}

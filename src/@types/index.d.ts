@@ -42,6 +42,30 @@ type Product = {
     id_account: string;
 };
 
+type Sale = {
+    id?: string;
+    total: number;
+    value_pay: number;
+    descount: number;
+    sale_type: 'PENDING' | 'PAID_OUT';
+    updated_at: string;
+    created_at?: string;
+    id_account: string;
+    id_customer: string;
+    customer: {
+        id: string;
+        name: string;
+        cpf: string;
+        road: string;
+        district: string;
+        number: string;
+        city: string;
+        phone: string;
+        zip_code: string;
+        created_at: string;
+    };
+};
+
 interface IPayload {
     name: string;
     email: string;
@@ -55,4 +79,4 @@ interface IPayload {
     id_account: string;
 }
 
-export { User, Role, Customer, IPayload, Product };
+export { User, Role, Customer, Sale, Sale_type, IPayload, Product };
