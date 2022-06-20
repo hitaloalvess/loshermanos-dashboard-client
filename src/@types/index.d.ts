@@ -66,6 +66,16 @@ type Sale = {
     };
 };
 
+type SaleProduct = {
+    id?: string;
+    description: string;
+    price: number;
+    image_name: string;
+    created_at?: string;
+    id_account: string;
+    amount?: number;
+};
+
 interface IPayload {
     name: string;
     email: string;
@@ -79,4 +89,4 @@ interface IPayload {
     id_account: string;
 }
 
-export { User, Role, Customer, Sale, Sale_type, IPayload, Product };
+export { User, Role, Customer, Sale, IPayload, Product, SaleProduct };

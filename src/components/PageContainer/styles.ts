@@ -15,6 +15,7 @@ const Header = styled.header`
     display: flex;
     align-items: center;
     height: 8rem;
+
     .welcome {
         margin-left: auto;
 
@@ -29,7 +30,7 @@ const Header = styled.header`
 `;
 
 const Content = styled.section`
-    padding: 2.4rem 0;
+    padding: 0 0 2.4rem 0;
 `;
 
 export { Container, ContentContainer, Header, Content };

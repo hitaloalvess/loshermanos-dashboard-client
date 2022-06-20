@@ -57,7 +57,43 @@ const ProductCardTitle = styled.div`
     }
 `;
 
-const ProductCardActionsForSales = styled.div``;
+const ProductCardActionsForSales = styled.div`
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0 1.6rem;
+`;
+
+const SalesCardButton = styled.button`
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--dark-secondary-hover);
+    transition: filter 0.3s ease-in-out;
+
+    svg {
+        width: 1.6rem;
+        height: 1.6rem;
+        color: var(--white);
+    }
+
+    &:hover {
+        filter: brightness(1.2);
+    }
+`;
+
+const SalesCardCount = styled.div`
+    font-size: 1.8rem;
+    font-weight: bold;
+    line-height: 2.3rem;
+    color: var(--white);
+`;
 
 const ProductCardActions = styled.div`
     width: 100%;
@@ -83,4 +119,6 @@ export {
     ProductCardTitle,
     ProductCardActionsForSales,
     ProductCardActions,
+    SalesCardButton,
+    SalesCardCount,
 };
