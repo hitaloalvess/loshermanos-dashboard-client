@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useInfiniteQuery } from 'react-query';
+import { toast } from 'react-toastify';
 
 import { Product, SaleProduct, User } from '../../../@types';
 import { PageContainer } from '../../../components';
 import { SaleSteps, SectionAddProducts } from '../../../components/Sales';
+import { SectionMyCart } from '../../../components/Sales/SectionMyCart';
 import { getProductsServerSide, useProducts } from '../../../hooks/useProducts';
 import { apiClient } from '../../../services/apiClient';
 import { extractUserDataCookie } from '../../../utils/extractUserDataCookie';
@@ -32,10 +34,30 @@ export default function RegisterSale({
     loggedUser,
     products,
 }: IRegisterSaleProps) {
+    const [currentStage, setCurrentStage] = useState<number>(1);
     const [listProducts, setListProducts] = useState<SaleProduct[]>([]);
     const [listSelectedProducts, setListSelectedProducts] = useState<
         SaleProduct[]
-    >([]);
+    >([
+        {
+            id: 'asdaslçdkew',
+            description: 'Pizza de Calabresa',
+            price: 40.0,
+            image_name:
+                '155c4b432e8f888a0327b771d825d35b-Pizza-de-calabresa.jpg',
+            id_account: '52981da9-8f82-49f3-aee4-f00c5aa492a2',
+            amount: 2,
+        },
+        {
+            id: 'asdaslçdkewss',
+            description: 'Pizza de Calabresa',
+            price: 40.0,
+            image_name:
+                '155c4b432e8f888a0327b771d825d35b-Pizza-de-calabresa.jpg',
+            id_account: '52981da9-8f82-49f3-aee4-f00c5aa492a2',
+            amount: 2,
+        },
+    ]);
 
     async function fetchProducts({ pageParam = 1 }) {
         const { data } = await apiClient.get(
@@ -82,6 +104,14 @@ export default function RegisterSale({
             setListProducts(products);
         }
     }, [data]);
+
+    const totalSale = useMemo(() => {
+        const total = listSelectedProducts.reduce((total, product) => {
+            return total + product.price * product.amount;
+        }, 0);
+
+        return total;
+    }, [listSelectedProducts]);
 
     function updateListProducts(product: SaleProduct) {
         const newList = listProducts.map(elem => {
@@ -131,6 +161,17 @@ export default function RegisterSale({
         [listSelectedProducts, listProducts],
     );
 
+    const updateStage = useCallback(
+        (currentStage: number) => {
+            if (currentStage === 2 && listSelectedProducts.length <= 0) {
+                toast.error('Adicione um produto a lista de venda!');
+                return;
+            }
+
+            setCurrentStage(currentStage);
+        },
+        [listSelectedProducts, currentStage],
+    );
     return (
         <PageContainer userName={loggedUser.name}>
             <>
@@ -143,11 +184,19 @@ export default function RegisterSale({
                         />
                     </ContentRegisterSaleHeader>
 
-                    <SectionAddProducts
+                    {/* <SectionAddProducts
                         listProducts={listProducts}
                         funAddProduct={addProductFromSelectedList}
                         funRemoveProduct={removeProductFromSelectedList}
-                    />
+                    /> */}
+
+                    {/* <SectionMyCart
+                        listProducts={listSelectedProducts}
+                        totalSale={totalSale}
+                        updateStage={updateStage}
+                        increaseProduct={addProductFromSelectedList}
+                        decreaseProduct={removeProductFromSelectedList}
+                    /> */}
                 </ContentRegisterSale>
             </>
         </PageContainer>

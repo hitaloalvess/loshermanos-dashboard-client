@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-const ContentRegisterSale = styled.main``;
+const ContentRegisterSale = styled.main`
+    display: flex;
+    flex-direction: column;
+    gap: 4.4rem;
+`;
 
 const ContentRegisterSaleHeader = styled.header`
     display: flex;

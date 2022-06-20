@@ -73,7 +73,7 @@ type SaleProduct = {
     image_name: string;
     created_at?: string;
     id_account: string;
-    amount?: number;
+    amount: number;
 };
 
 interface IPayload {
