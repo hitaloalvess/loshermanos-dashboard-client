@@ -1,4 +1,7 @@
-import { Product, SaleProduct } from '../../../@types';
+import router from 'next/router';
+
+import { Product } from '../../../@types';
+import { formatInReal } from '../../../utils/formatInReal';
 import { Button } from '../../Buttons';
 import { ProductsList } from '../../ProductsList';
 import {
@@ -9,15 +12,19 @@ import {
 } from './styles';
 
 interface ISectionAddProductsProps {
-    listProducts: Product[] | SaleProduct[];
-    funAddProduct: (product: SaleProduct) => void;
-    funRemoveProduct: (product: SaleProduct) => void;
+    listProducts: Product[];
+    totalSale: number;
+    funAddProduct: (product: Product) => void;
+    funRemoveProduct: (product: Product) => void;
+    updateStage: (currentStage: number) => void;
 }
 
 function SectionAddProducts({
     listProducts,
+    totalSale,
     funAddProduct,
     funRemoveProduct,
+    updateStage,
 }: ISectionAddProductsProps) {
     return (
         <AddProductsContainer>
@@ -31,16 +38,13 @@ function SectionAddProducts({
             <AddProductsFooter>
                 <AddProductsTotalSale>
                     <p>Valor total</p>
-                    <p className="value">R$100</p>
+                    <p className="value">{formatInReal(totalSale)}</p>
                 </AddProductsTotalSale>
                 <AddProductsActions>
-                    <Button
-                        type="cancel"
-                        onClick={() => console.log('Cancelando')}
-                    >
+                    <Button type="cancel" onClick={() => router.push('/sales')}>
                         <p>Cancelar</p>
                     </Button>
-                    <Button onClick={() => console.log('Next...')}>
+                    <Button onClick={() => updateStage(2)}>
                         <p>Próxima etapa</p>
                     </Button>
                 </AddProductsActions>

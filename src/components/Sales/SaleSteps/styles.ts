@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface ISaleStepsButton {
+interface IStepsItemProps {
     stageSituation: 'currentStage' | 'completedStage' | 'default';
 }
 
@@ -11,66 +11,73 @@ const styleBorderButton = {
 };
 
 const styleBackgroundButton = {
-    currentStage: `transparent`,
+    currentStage: `var(--dark-surface-primary)`,
     completedStage: `var(--orange)`,
     default: `var(--dark-surface-primary)`,
 };
 
-const SaleStepsContainer = styled.section`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-`;
-
-const SaleStepsItem = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 0 1.2rem;
-`;
-
-const SaleStepsButton = styled.button<ISaleStepsButton>`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 3.2rem;
-    height: 3.2rem;
-    font-size: 1.6rem;
-    color: var(--white);
-    font-weight: bold;
-    clip-path: circle();
-    border: ${props => styleBorderButton[props.stageSituation]};
-    border-radius: 50%;
-    background-color: ${props => styleBackgroundButton[props.stageSituation]};
-    transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
-
-    svg {
-        width: 2.4rem;
-        height: 2.4rem;
-    }
-
-    &:hover {
-        border-color: var(--orange);
-        color: var(--orange);
-    }
-`;
-
-const SaleStepsItemTitle = styled.p`
-    display: inline-block;
-    font-size: 1.6rem;
-`;
-
-const SaleStepsDivider = styled.div`
-    width: calc(100% - 85rem);
-    margin: 0 1rem;
-    height: 2px;
-    background-color: var(--text-secondary);
-`;
-
-export {
-    SaleStepsContainer,
-    SaleStepsItem,
-    SaleStepsButton,
-    SaleStepsItemTitle,
-    SaleStepsDivider,
+const styleBackgroundDivider = {
+    currentStage: `var(--orange)`,
+    completedStage: `var(--orange)`,
+    default: `var(--dark-surface-primary)`,
 };
+
+const SaleStagesContainer = styled.section`
+    width: 100%;
+`;
+
+const StepsContainer = styled.ul`
+    counter-reset: step;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+`;
+
+const StepsItem = styled.li<IStepsItemProps>`
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem 0;
+
+    p {
+        font-size: 1.2rem;
+    }
+
+    &:before {
+        content: counter(step);
+        counter-increment: step;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        width: 3rem;
+        height: 3rem;
+        clip-path: circle();
+        border-radius: 50%;
+        border: ${props => styleBorderButton[props.stageSituation]};
+        background-color: ${props =>
+            styleBackgroundButton[props.stageSituation]};
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        top: 1.5rem;
+        left: -50%;
+        background-color: var(--dark-surface-secondary);
+        z-index: -1;
+    }
+
+    & + li:after {
+        background-color: ${props =>
+            styleBackgroundDivider[props.stageSituation]};
+    }
+
+    &:first-child:after {
+        content: none;
+    }
+`;
+
+export { SaleStagesContainer, StepsContainer, StepsItem };

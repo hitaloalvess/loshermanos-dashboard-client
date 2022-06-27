@@ -38,6 +38,7 @@ type Product = {
     description: string;
     price: number;
     image_name: string;
+    amount?: number;
     created_at?: string;
     id_account: string;
 };
@@ -52,28 +53,8 @@ type Sale = {
     created_at?: string;
     id_account: string;
     id_customer: string;
-    customer: {
-        id: string;
-        name: string;
-        cpf: string;
-        road: string;
-        district: string;
-        number: string;
-        city: string;
-        phone: string;
-        zip_code: string;
-        created_at: string;
-    };
-};
-
-type SaleProduct = {
-    id?: string;
-    description: string;
-    price: number;
-    image_name: string;
-    created_at?: string;
-    id_account: string;
-    amount: number;
+    customer?: Customer;
+    products?: Product[];
 };
 
 interface IPayload {
@@ -89,4 +70,4 @@ interface IPayload {
     id_account: string;
 }
 
-export { User, Role, Customer, Sale, IPayload, Product, SaleProduct };
+export { User, Role, Customer, Sale, IPayload, Product };

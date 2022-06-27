@@ -10,7 +10,7 @@ interface IGetCustomersResponse {
 }
 
 export async function getCustomers(id_account: string): Promise<Customer[]> {
-    const { data } = await apiClient.get(`/customers/${id_account}`);
+    const { data } = await apiClient.get(`/customers/all/${id_account}`);
 
     const customers: Customer[] = data.map((customer: Customer) => {
         return { ...customer };
@@ -25,7 +25,7 @@ export async function getCustomersServerSide(
 ): Promise<Customer[]> {
     const api = setupClient(ctx);
 
-    const { data } = await api.get(`/customers/${id_account}`);
+    const { data } = await api.get(`/customers/all/${id_account}`);
 
     const customers: Customer[] = data.map((customer: Customer) => {
         return { ...customer };

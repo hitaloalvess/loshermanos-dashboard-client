@@ -1,6 +1,6 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react';
 
-import { SaleProduct } from '../../../@types';
+import { Product } from '../../../@types';
 import { formatInReal } from '../../../utils/formatInReal';
 import { Button } from '../../Buttons';
 import {
@@ -19,11 +19,11 @@ import {
 } from './styles';
 
 interface ISectionMyCart {
-    listProducts: SaleProduct[];
+    listProducts: Product[];
     totalSale: number;
     updateStage: (currentStage: number) => void;
-    decreaseProduct: (product: SaleProduct) => void;
-    increaseProduct: (product: SaleProduct) => void;
+    decreaseProduct: (product: Product) => void;
+    increaseProduct: (product: Product) => void;
 }
 
 function SectionMyCart({
@@ -33,18 +33,18 @@ function SectionMyCart({
     decreaseProduct,
     increaseProduct,
 }: ISectionMyCart) {
-    function increaseQuantityOfProduct(product: SaleProduct) {
+    function increaseQuantityOfProduct(product: Product) {
         increaseProduct({
             ...product,
-            amount: product.amount + 1,
+            amount: Number(product.amount) + 1,
         });
     }
 
-    function decreaseQuantityOfProduct(product: SaleProduct) {
-        if (product.amount - 1 > 0) {
+    function decreaseQuantityOfProduct(product: Product) {
+        if (Number(product.amount) - 1 > 0) {
             decreaseProduct({
                 ...product,
-                amount: product.amount - 1,
+                amount: Number(product.amount) - 1,
             });
         } else {
             decreaseProduct({
@@ -92,7 +92,7 @@ function SectionMyCart({
                                         <Minus />
                                     </MyCartItemButton>
 
-                                    <p>{product.amount}</p>
+                                    <p>{Number(product.amount)}</p>
 
                                     <MyCartItemButton
                                         onClick={() =>
@@ -107,7 +107,7 @@ function SectionMyCart({
                                     <p>
                                         {formatInReal(
                                             product.price *
-                                                Number(product.amount),
+                                                Number(Number(product.amount)),
                                         )}
                                     </p>
                                 </MyCartItemTotal>
@@ -123,7 +123,7 @@ function SectionMyCart({
                 </SectionMyCartFooterTotal>
                 <SectionMyCartFooterActions>
                     <Button type="cancel" onClick={() => updateStage(1)}>
-                        <p>Cancelar</p>
+                        <p>Voltar</p>
                     </Button>
                     <Button onClick={() => updateStage(3)}>
                         <p>Próxima etapa</p>

@@ -56,7 +56,7 @@ function TableSales({
                 {bodyContent &&
                     bodyContent.map(sale => (
                         <TableRow key={sale.id}>
-                            <td>{sale.customer.name}</td>
+                            <td>{sale.customer?.name}</td>
                             <td>
                                 {formatInReal(
                                     calcTotalSale({
