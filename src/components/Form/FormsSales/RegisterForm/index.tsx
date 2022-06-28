@@ -54,7 +54,6 @@ interface IRegisterFormProps {
 
 const createSaleFormSchema = yup.object({
     customer: yup.string().required('Name é obrigatório'),
-    date: yup.string().required('Data é obrigatório'),
     saleType: yup.string().nullable().required('Tipo de venda é obrigatório'),
 });
 
@@ -105,7 +104,7 @@ function RegisterForm({
                 value_pay,
                 descount,
                 sale_type: values.saleType,
-                updated_at: new Date(values.date),
+                updated_at: new Date(),
                 id_account,
                 id_customer: customer?.id as string,
                 products: saleProducts,
@@ -137,15 +136,7 @@ function RegisterForm({
                     </FormInputSearch>
                 </FormRow>
 
-                <FormRow countItens={2}>
-                    <FormInput
-                        placeholder="dd/MM/YY"
-                        error={errors.date}
-                        {...register('date')}
-                    >
-                        <CalendarBlank />
-                    </FormInput>
-
+                <FormRow countItens={1}>
                     <FormInput
                         type="number"
                         placeholder="Desconto"

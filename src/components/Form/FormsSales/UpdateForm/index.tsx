@@ -1,12 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import router from 'next/router';
-import {
-    CalendarBlank,
-    CurrencyCircleDollar,
-    NotePencil,
-    Ticket,
-    User,
-} from 'phosphor-react';
+import { CurrencyCircleDollar, NotePencil, Ticket, User } from 'phosphor-react';
 import { useContext, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
@@ -54,11 +48,8 @@ interface IUpdateFormProps {
 
 const updateSaleFormSchema = yup.object({
     customer: yup.string().required('Name é obrigatório'),
-    date: yup.string().required('Data é obrigatório'),
     saleType: yup.string().nullable().required('Tipo de venda é obrigatório'),
 });
-
-const firstRender = false;
 
 function UpdateForm({
     defaultSale,
@@ -67,7 +58,6 @@ function UpdateForm({
     saleProducts,
     updateStage,
 }: IUpdateFormProps) {
-    console.log(defaultSale);
     const [customer, setCustomer] = useState<Customer>(
         defaultSale.customer as Customer,
     );
@@ -115,7 +105,7 @@ function UpdateForm({
                 value_pay,
                 descount,
                 sale_type: values.saleType,
-                updated_at: new Date(values.date),
+                updated_at: new Date(),
                 id_account,
                 id_customer: customer?.id as string,
                 products: saleProducts,
@@ -148,8 +138,8 @@ function UpdateForm({
                     </FormInputSearch>
                 </FormRow>
 
-                <FormRow countItens={2}>
-                    <FormInput
+                <FormRow countItens={1}>
+                    {/* <FormInput
                         placeholder="dd/MM/YY"
                         defaultValue={new Intl.DateTimeFormat('pt-BR').format(
                             new Date(),
@@ -158,7 +148,7 @@ function UpdateForm({
                         {...register('date')}
                     >
                         <CalendarBlank />
-                    </FormInput>
+                    </FormInput> */}
 
                     <FormInput
                         type="number"
