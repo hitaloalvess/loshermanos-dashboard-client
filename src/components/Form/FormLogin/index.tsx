@@ -61,7 +61,7 @@ function FormLogin() {
 
             <RegisterNow>
                 <p>Não tem uma conta?</p>
-                <a href="">Registre-se agora</a>
+                <a href="/signup">Registre-se agora</a>
             </RegisterNow>
         </FormLoginContainer>
     );

@@ -12,7 +12,6 @@ const ContainerAuth = styled.main`
     position: relative;
     width: 100%;
     height: 100vh;
-    /* display: flex; */
 `;
 
 const Banner = styled.section<IBannerProps>`
@@ -29,6 +28,10 @@ const Banner = styled.section<IBannerProps>`
         height: 100%;
         object-fit: cover;
     }
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 
 const ContentAuth = styled.section<IContentProps>`
@@ -39,6 +42,17 @@ const ContentAuth = styled.section<IContentProps>`
     width: 50%;
     display: flex;
     justify-content: center;
+
+    @media (max-width: 768px) {
+        position: relative;
+        width: 100%;
+        max-width: 40rem;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 480px) {
+        max-width: 28rem;
+    }
 `;
 
 export { ContainerAuth, Banner, ContentAuth };

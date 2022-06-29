@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const TopSellingProductsContainer = styled.div`
     grid-area: topSellingProducts;
-    width: 100%;
     height: 35rem;
     display: flex;
     flex-direction: column;
@@ -15,6 +14,14 @@ const TopSellingProductsContainer = styled.div`
 const TopSellingProductsTitle = styled.h1`
     font-size: 2rem;
     font-weight: 500;
+
+    @media (max-width: 1024px) {
+        font-size: 1.8rem;
+    }
+
+    @media (max-width: 1024px) {
+        font-size: 1.6rem;
+    }
 `;
 
 const TopSellingProductsList = styled.table`

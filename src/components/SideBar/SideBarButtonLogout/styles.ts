@@ -27,6 +27,10 @@ const SideBarButtonLogoutContainer = styled.button`
             color: var(--orange);
         }
     }
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 
 export { SideBarButtonLogoutContainer };

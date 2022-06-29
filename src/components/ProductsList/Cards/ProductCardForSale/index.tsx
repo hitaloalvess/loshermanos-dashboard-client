@@ -1,7 +1,7 @@
 import { Minus, PencilSimple, Plus, Trash } from 'phosphor-react';
 import { useEffect, useState } from 'react';
 
-import { SaleProduct } from '../../../../@types';
+import { Product } from '../../../../@types';
 import { formatInReal } from '../../../../utils/formatInReal';
 import {
     ProductCardActionsForSales,
@@ -14,9 +14,9 @@ import {
 } from '../styles';
 
 interface IProductCardProps {
-    product: SaleProduct;
-    funAddProduct: (product: SaleProduct) => void;
-    funRemoveProduct: (product: SaleProduct) => void;
+    product: Product;
+    funAddProduct: (product: Product) => void;
+    funRemoveProduct: (product: Product) => void;
 }
 
 function ProductCardForSales({

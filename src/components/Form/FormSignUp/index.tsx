@@ -83,7 +83,7 @@ function FormSignUp() {
 
     return (
         <FormSignUpContainer>
-            <FormSignUpBackButton>
+            <FormSignUpBackButton href="/">
                 <ArrowLeft />
             </FormSignUpBackButton>
 

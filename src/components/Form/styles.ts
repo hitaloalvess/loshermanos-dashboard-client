@@ -9,7 +9,7 @@ const FormContainer = styled.section`
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 3.2rem 0;
+    gap: 2.4rem 0;
     form {
         display: flex;
         flex-direction: column;
@@ -23,11 +23,21 @@ const FormTitle = styled.h1`
     font-weight: bold;
     line-height: 4.8rem;
     color: var(--orange);
+
+    @media (max-width: 468px) {
+        font-size: 2.4rem;
+    }
 `;
 
 const FormRow = styled.div<IFormRegisterRowProps>`
     display: grid;
     grid-template-columns: ${props => `repeat(${props.countItens}, 1fr)`};
     gap: 0 2.4rem;
+
+    @media (max-width: 468px) {
+        display: flex;
+        flex-direction: column;
+        gap: 2.4rem 0;
+    }
 `;
 export { FormContainer, FormTitle, FormRow };

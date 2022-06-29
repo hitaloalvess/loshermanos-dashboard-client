@@ -9,9 +9,13 @@ import {
 import { SideBarItem } from '../SideBarItem';
 import { SideBarListItemContainer } from './styles';
 
-function SideBarListItem() {
+interface ISideBarListItemProps {
+    showMenu: boolean;
+}
+
+function SideBarListItem({ showMenu }: ISideBarListItemProps) {
     return (
-        <SideBarListItemContainer>
+        <SideBarListItemContainer className={showMenu ? 'showMenu' : ''}>
             <SideBarItem href="/dashboard">
                 <>
                     <PresentationChart />

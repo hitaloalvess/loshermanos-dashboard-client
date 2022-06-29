@@ -19,20 +19,28 @@ const ContentDashboardHeader = styled.header`
 
 const DashboardGraphicsContainer = styled.section`
     position: relative;
-    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 12.8rem 1fr;
     grid-template-areas: 'summary summary summary' 'balance balance topSellingProducts';
     gap: 2.4rem;
+
+    @media (max-width: 480px) {
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr;
+        grid-template-areas: 'summary' 'balance' 'topSellingProducts';
+    }
 `;
 
 const SummaryContainer = styled.div`
     grid-area: summary;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-direction: row;
     gap: 2.4rem;
+
+    @media (max-width: 480px) {
+        flex-direction: column;
+    }
 `;
 
 export {

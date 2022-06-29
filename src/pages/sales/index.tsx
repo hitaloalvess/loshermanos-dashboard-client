@@ -128,6 +128,7 @@ export default function Sales({ loggedUser, sales }: ISalesProps) {
                 <ModalContainer
                     isOpen={isOpenDeleteModal}
                     funCloseModal={() => funCloseDeleteModal()}
+                    alignItemContainer="center"
                 >
                     <FormDelete
                         title="Excluir venda"

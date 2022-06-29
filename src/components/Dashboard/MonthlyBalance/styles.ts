@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const MonthlyBalanceContainer = styled.div`
     grid-area: balance;
-    width: 100%;
     height: 35rem;
     padding: 2.4rem 3.2rem;
     border-radius: 8px;

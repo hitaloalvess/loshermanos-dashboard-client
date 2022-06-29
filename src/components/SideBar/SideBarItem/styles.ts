@@ -15,6 +15,10 @@ const SideBarItemContainer = styled.li`
     position: relative;
     width: 100%;
     height: 6.4rem;
+
+    @media (max-width: 768px) {
+        border-bottom: 1px solid var(--white);
+    }
 `;
 
 const SideBarItemBackground = styled.div`
@@ -42,6 +46,10 @@ const CurvedEdge = styled.div<ICurvedEdgeProps>`
             props.curvedEdgeSide === 'top'
                 ? `border-radius: 0 0 2rem 0;`
                 : `border-radius: 0 2rem 0 0;`}
+    }
+
+    @media (max-width: 768px) {
+        display: none;
     }
 `;
 
@@ -87,6 +95,12 @@ const SideBarItemLink = styled.a<ISideBarLinkProps>`
             color: var(--orange);
         }
     }
+
+    @media (max-width: 768px) {
+        &::before {
+            display: none;
+        }
+    }
 `;
 
 const SideBarItemSelector = styled.div`
@@ -96,6 +110,10 @@ const SideBarItemSelector = styled.div`
     background-color: var(--orange);
     border-radius: 0 32px 32px 0;
     z-index: 99;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 
 export {

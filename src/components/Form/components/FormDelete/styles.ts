@@ -12,12 +12,21 @@ const FormDeleteTitle = styled.h1`
     font-weight: bold;
     line-height: 4.8rem;
     color: var(--orange);
+
+    @media (max-width: 480px) {
+        font-size: 2.8rem;
+    }
 `;
 
 const FormDeleteSubtitle = styled.p`
+    text-align: center;
     font-size: 1.6rem;
     font-weight: 700;
     color: var(--white);
+
+    @media (max-width: 480px) {
+        font-size: 1.2rem;
+    }
 `;
 
 const FormDeleteActions = styled.div`

@@ -5,8 +5,12 @@ const SectionCustomerInformationContainer = styled.section`
 `;
 
 const SectionCustomerInformationContent = styled.div`
-    width: 45rem;
-    max-width: 50rem;
+    width: 55rem;
+    max-width: 60rem;
+
+    @media (max-width: 480px) {
+        max-width: 35rem;
+    }
 `;
 
 export {

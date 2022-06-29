@@ -42,7 +42,7 @@ function SectionMyCart({
 
     function decreaseQuantityOfProduct(product: Product) {
         if (Number(product.amount) - 1 > 0) {
-            decreaseProduct({
+            increaseProduct({
                 ...product,
                 amount: Number(product.amount) - 1,
             });

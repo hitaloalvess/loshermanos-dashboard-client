@@ -32,6 +32,10 @@ const SectionMyCartItems = styled.table`
                 padding: 0 0 0 2.4rem;
             }
         }
+
+        @media (max-width: 480px) {
+            display: none;
+        }
     }
 
     tbody {
@@ -59,6 +63,10 @@ const MyCartItemImage = styled.td`
 
 const MyCartItemTitle = styled.td`
     padding: 0 0 0 2.4rem;
+
+    @media (max-width: 480px) {
+        display: block;
+    }
 `;
 
 const MyCartItemCounter = styled.td`
@@ -66,6 +74,12 @@ const MyCartItemCounter = styled.td`
     display: flex;
     align-items: center;
     gap: 0 1.6rem;
+
+    @media (max-width: 480px) {
+        gap: 0.8rem;
+        padding: 0 0 0 2.4rem;
+        height: 4rem;
+    }
 `;
 
 const MyCartItemButton = styled.button`
@@ -96,11 +110,20 @@ const SectionMyCartFooter = styled.footer`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 480px) {
+        flex-direction: column;
+        gap: 2.4rem 0;
+    }
 `;
 
 const SectionMyCartFooterActions = styled.div`
     display: flex;
     gap: 2.4rem;
+
+    @media (max-width: 480px) {
+        margin-left: auto;
+    }
 `;
 
 const SectionMyCartFooterTotal = styled.div`
@@ -118,6 +141,13 @@ const SectionMyCartFooterTotal = styled.div`
             color: var(--white);
             background-color: var(--dark-surface-primary);
         }
+    }
+
+    @media (max-width: 480px) {
+        margin-left: auto;
+        /* p:not(p.value) {
+            display: none;
+        } */
     }
 `;
 

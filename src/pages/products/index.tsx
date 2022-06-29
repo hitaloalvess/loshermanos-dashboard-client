@@ -188,6 +188,7 @@ export default function Products({ loggedUser }: IProductsProps) {
                 <ModalContainer
                     isOpen={isOpenDeleteModal}
                     funCloseModal={funCloseDeleteModal}
+                    alignItemContainer="center"
                 >
                     <FormDelete
                         title="Excluir produto"

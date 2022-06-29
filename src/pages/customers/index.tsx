@@ -137,6 +137,7 @@ export default function Customers({ customers, loggedUser }: ICustomers) {
                 <ModalContainer
                     isOpen={isOpenDeleteModal}
                     funCloseModal={() => setIsOpenDeleteModal(false)}
+                    alignItemContainer="center"
                 >
                     <FormDelete
                         title="Excluir cliente"

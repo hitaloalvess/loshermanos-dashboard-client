@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 
 const ModalContent = styled.dialog`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     padding: 4.4rem 12.8rem;
     display: flex;
     justify-content: center;
@@ -12,7 +8,12 @@ const ModalContent = styled.dialog`
     flex-direction: column;
     border: none;
     border-radius: 5px;
+    margin: auto;
     background-color: var(--background);
+
+    @media (max-width: 468px) {
+        padding: 2.4rem;
+    }
 `;
 
 const ModalButtonClose = styled.button`
@@ -31,6 +32,11 @@ const ModalButtonClose = styled.button`
         &:hover {
             color: var(--orange);
         }
+    }
+
+    @media (max-width: 480px) {
+        top: 2.4rem;
+        right: 1.8rem;
     }
 `;
 

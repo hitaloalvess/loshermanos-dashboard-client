@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 const Container = styled.main`
     padding-left: 24.5rem;
+
+    @media (max-width: 768px) {
+        padding-left: 0;
+    }
 `;
 
 const ContentContainer = styled.section`
@@ -9,6 +13,10 @@ const ContentContainer = styled.section`
     display: flex;
     flex-direction: column;
     padding: 0 8rem;
+
+    @media (max-width: 768px) {
+        padding: 0 4rem;
+    }
 `;
 
 const Header = styled.header`

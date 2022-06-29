@@ -1,18 +1,18 @@
 import { ReactElement } from 'react';
 
-import { Product, SaleProduct } from '../../@types';
+import { Product } from '../../@types';
 import { ProductCard } from './Cards/ProductCard';
 import { ProductCardForSales } from './Cards/ProductCardForSale';
 import { ProductsListContainer, ProductsListContent } from './styles';
 
 interface IProductsListProps {
     products?: Product[];
-    saleProducts?: SaleProduct[];
+    saleProducts?: Product[];
     typeCard?: 'cardForSales' | undefined;
     funUpdateProduct?: (product: Product) => void;
     funDeleteProduct?: (product: Product) => void;
-    funAddProduct?: (product: SaleProduct) => void;
-    funRemoveProduct?: (product: SaleProduct) => void;
+    funAddProduct?: (product: Product) => void;
+    funRemoveProduct?: (product: Product) => void;
     children?: ReactElement;
 }
 
@@ -50,12 +50,12 @@ function ProductsList({
                                     product={product}
                                     funAddProduct={
                                         funAddProduct as (
-                                            product: SaleProduct,
+                                            product: Product,
                                         ) => void
                                     }
                                     funRemoveProduct={
                                         funRemoveProduct as (
-                                            product: SaleProduct,
+                                            product: Product,
                                         ) => void
                                     }
                                 />

@@ -45,6 +45,12 @@ const ButtonContainer = styled.button<IButtonContainerProps>`
     &:hover {
         filter: brightness(0.85);
     }
+
+    @media (max-width: 480px) {
+        svg + p {
+            display: none;
+        }
+    }
 `;
 
 export { ButtonContainer };

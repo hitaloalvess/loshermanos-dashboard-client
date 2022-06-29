@@ -128,6 +128,7 @@ export default function Users({ loggedUser, users }: IUsersProps) {
                 <ModalContainer
                     isOpen={isOpenDeleteModal}
                     funCloseModal={() => setIsOpenDeleteModal(false)}
+                    alignItemContainer="center"
                 >
                     <FormDelete
                         title="Excluir usuário"

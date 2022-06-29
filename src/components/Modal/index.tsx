@@ -10,21 +10,34 @@ const customStyles: Styles = {
         backdropFilter: 'blur(8px)',
         zIndex: 9999,
     },
-    content: {
-        background: `transparent`,
-        border: `none`,
-    },
 };
 
 interface IModalProps {
     isOpen: boolean;
     funCloseModal: () => void;
     children: ReactElement;
+    alignItemContainer?: 'flex-start' | 'flex-end' | 'center';
 }
 
-function ModalContainer({ isOpen, funCloseModal, children }: IModalProps) {
+function ModalContainer({
+    isOpen,
+    funCloseModal,
+    alignItemContainer,
+    children,
+}: IModalProps) {
     return (
-        <Modal style={customStyles} isOpen={isOpen}>
+        <Modal
+            style={{
+                ...customStyles,
+                content: {
+                    display: 'flex',
+                    alignItems: `${alignItemContainer || 'flex-start'}`,
+                    background: 'transparent',
+                    border: 'none',
+                },
+            }}
+            isOpen={isOpen}
+        >
             <ModalContent>
                 <ModalButtonClose onClick={funCloseModal}>
                     <X />

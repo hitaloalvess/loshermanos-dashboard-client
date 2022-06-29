@@ -16,6 +16,10 @@ const TableHead = styled.thead`
         font-size: 1.6rem;
         color: var(--text-secondary);
     }
+
+    @media (max-width: 480px) {
+        display: none;
+    }
 `;
 
 const TableBody = styled.tbody``;
@@ -37,6 +41,22 @@ const TableRow = styled.tr`
         &.buttons {
             button + button {
                 margin-left: 0.8rem;
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        position: relative;
+        display: block;
+        text-align: center;
+        margin-bottom: 2rem;
+        border-radius: 5px;
+
+        td {
+            display: block;
+            padding: 1.2rem 0;
+            &:last-child {
+                width: 100%;
             }
         }
     }
