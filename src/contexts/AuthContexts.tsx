@@ -95,11 +95,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
                 email: response.data.user.email,
                 username: response.data.user.username,
                 telefone: response.data.user.telefone,
-                role: {
-                    id: response.data.user.role.id,
-                    name: response.data.user.role.name,
-                    description: response.data.user.role.description,
-                },
+                admin: response.data.admin,
                 id_account: response.data.user.id_account,
             });
 
