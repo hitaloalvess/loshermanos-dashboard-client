@@ -9,7 +9,7 @@ import { destroyCookie, parseCookies } from 'nookies';
 import { AuthTokenError } from '../errors/AuthTokenError';
 
 interface IWithSRRAuthOptions {
-    admin: string;
+    admin?: boolean;
 }
 
 export const withSSRAuth = <P>(
@@ -36,7 +36,7 @@ export const withSSRAuth = <P>(
 
             const { admin: adminUser } = options;
 
-            if (adminToken !== adminUser) {
+            if (adminUser && !adminToken) {
                 return {
                     redirect: {
                         destination: '/dashboard',

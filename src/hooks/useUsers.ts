@@ -24,7 +24,7 @@ export async function getUsersServerSide(
     id_account: string,
     ctx: GetServerSidePropsContext,
 ): Promise<User[]> {
-    const { '@LosHermanosDash.token': token } = parseCookies();
+    const { '@LosHermanosDash.token': token } = parseCookies(ctx);
     const api = setupClient(ctx);
 
     const { data } = await api.get(`/users/${id_account}`, {
