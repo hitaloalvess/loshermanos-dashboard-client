@@ -106,7 +106,6 @@ export default function Users({ loggedUser, users }: IUsersProps) {
                         headerContent={[
                             'Nome',
                             'Username',
-                            'Cargo',
                             'E-mail',
                             'Telefone',
                         ]}
@@ -168,6 +167,6 @@ export const getServerSideProps: GetServerSideProps = withSSRAuth(
         };
     },
     {
-        role: 'admin',
+        admin: true,
     },
 );
