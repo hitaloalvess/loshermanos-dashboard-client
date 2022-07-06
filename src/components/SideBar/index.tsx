@@ -22,7 +22,6 @@ function SideBar() {
                 activateButtonToggle={activateToggle}
             />
             <SideBarListItem showMenu={isToggleActive} />
-            <SideBarButtonLogout />
         </SideBarContainer>
     );
 }

@@ -6,6 +6,7 @@ import {
     Users,
 } from 'phosphor-react';
 
+import { SideBarButtonLogout } from '../SideBarButtonLogout';
 import { SideBarItem } from '../SideBarItem';
 import { SideBarListItemContainer } from './styles';
 
@@ -46,6 +47,8 @@ function SideBarListItem({ showMenu }: ISideBarListItemProps) {
                     <p>Usuários</p>
                 </>
             </SideBarItem>
+
+            <SideBarButtonLogout />
         </SideBarListItemContainer>
     );
 }

@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 const SideBarButtonLogoutContainer = styled.button`
     width: 100%;
+    height: 6.3rem;
     display: flex;
     justify-content: flex-start;
-    align-items: flex-end;
-    margin-left: 5.6rem;
+    align-items: center;
+    padding: 0 5.6rem;
     color: var(--white);
     border: none;
     background-color: transparent;
@@ -29,7 +30,7 @@ const SideBarButtonLogoutContainer = styled.button`
     }
 
     @media (max-width: 768px) {
-        display: none;
+        border-bottom: 1px solid var(--white);
     }
 `;
 
