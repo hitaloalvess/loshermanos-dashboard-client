@@ -9,7 +9,7 @@ import { StatusContainer } from './styles';
 interface ITableProps {
     headerContent: string[];
     bodyContent: Sale[];
-    userRole: string;
+    admin: boolean;
     funActiveModalDelete: (sale: Sale) => void;
     funUpdateSale: (saleId: string) => void;
     funActiveModalPayment: (sale: Sale) => void;
@@ -25,7 +25,7 @@ interface ICalcTotalSaleParams {
 function TableSales({
     headerContent,
     bodyContent,
-    userRole,
+    admin,
     funActiveModalDelete,
     funUpdateSale,
     funActiveModalPayment,
@@ -81,7 +81,7 @@ function TableSales({
                                     new Date(sale.created_at as string),
                                 )}
                             </td>
-                            {userRole === 'admin' && (
+                            {admin && (
                                 <td className="buttons">
                                     {
                                         <>

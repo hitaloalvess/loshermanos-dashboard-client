@@ -106,7 +106,7 @@ export default function Sales({ loggedUser, sales }: ISalesProps) {
                     <TableSales
                         headerContent={['Nome', 'Total', 'Status', 'Data']}
                         bodyContent={data as Sale[]}
-                        userRole={loggedUser.role.name}
+                        admin={loggedUser.admin}
                         funActiveModalDelete={activeDeleteModal}
                         funUpdateSale={(saleId: string) =>
                             router.push(`/sales/update/${saleId}`)
