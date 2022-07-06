@@ -9,12 +9,6 @@ type User = {
     id_account: string;
 };
 
-type Role = {
-    id: string;
-    name: string;
-    description: string;
-};
-
 type Customer = {
     id?: string;
     name: string;
@@ -58,12 +52,8 @@ interface IPayload {
     email: string;
     username: string;
     telefone: string;
-    role: {
-        id: string;
-        name: string;
-        description: string;
-    };
+    admin: boolean;
     id_account: string;
 }
 
-export { User, Role, Customer, Sale, IPayload, Product };
+export { User, Customer, Sale, IPayload, Product };
