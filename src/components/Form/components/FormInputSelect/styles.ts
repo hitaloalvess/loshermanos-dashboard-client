@@ -58,4 +58,9 @@ const InputSelectMessageError = styled.div`
     }
 `;
 
-export { InputSelectContainer, InputSelectMessageError };
+const InputSelectLabel = styled.label`
+    font-size: 1.2rem;
+    color: var(--orange);
+`;
+
+export { InputSelectContainer, InputSelectMessageError, InputSelectLabel };

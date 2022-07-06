@@ -1,17 +1,14 @@
 import { CaretDown, WarningCircle } from 'phosphor-react';
-import { forwardRef, ForwardRefRenderFunction, useState } from 'react';
+import { forwardRef, ForwardRefRenderFunction } from 'react';
 import { FieldError } from 'react-hook-form';
 
-import { InputSelectContainer, InputSelectMessageError } from './styles';
-
-type Option = {
-    id: string;
-    name: string;
-    description: string;
-};
+import {
+    InputSelectContainer,
+    InputSelectLabel,
+    InputSelectMessageError,
+} from './styles';
 
 interface IFormInputSelect {
-    options: Option[];
     error?: FieldError;
     defaultValue?: string;
 }
@@ -19,17 +16,13 @@ interface IFormInputSelect {
 const FormInputSelectBase: ForwardRefRenderFunction<
     HTMLSelectElement,
     IFormInputSelect
-> = ({ options, error, defaultValue, ...rest }: IFormInputSelect, ref) => {
+> = ({ error, defaultValue, ...rest }: IFormInputSelect, ref) => {
     return (
         <InputSelectContainer error={error}>
             <select defaultValue={defaultValue} ref={ref} {...rest}>
-                {!defaultValue && <option value="">Selecione o cargo</option>}
-                {options &&
-                    options.map(option => (
-                        <option key={option.id} value={option.id}>
-                            {option.description}
-                        </option>
-                    ))}
+                <option value="">Usuário é admin?</option>
+                <option value="true">Sim</option>
+                <option value="false">Não</option>
             </select>
 
             <CaretDown />

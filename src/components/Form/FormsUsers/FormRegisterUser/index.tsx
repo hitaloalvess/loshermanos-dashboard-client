@@ -6,9 +6,7 @@ import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 
-import { Role } from '../../../../@types';
 import { AuthContext } from '../../../../contexts/AuthContexts';
-import { useRoles } from '../../../../hooks/useRoles';
 import { apiClient } from '../../../../services/apiClient';
 import { queryClient } from '../../../../services/queryClient';
 import { FormButton } from '../../components/FormButton';
@@ -23,7 +21,7 @@ interface IRegisterUserFormData {
     password: string;
     password_confirmation: string;
     telefone: string;
-    id_role: string;
+    admin: string;
     id_account?: string;
 }
 
@@ -43,13 +41,11 @@ const registerUserFormSchema = yup.object({
         .string()
         .oneOf([null, yup.ref('password')], 'As senhas devem ser iguais'),
     telefone: yup.string().required('Telefone é obrigatório'),
-    id_role: yup.string().required('Cargo é obrigatório'),
+    admin: yup.string().required('Campo admin é obrigatório'),
 });
 
 function FormRegisterUser({ funCloseModal }: IFormRegisterProps) {
     const { user } = useContext(AuthContext);
-
-    const { data } = useRoles(user.id_account);
 
     const {
         register,
@@ -65,7 +61,7 @@ function FormRegisterUser({ funCloseModal }: IFormRegisterProps) {
             email,
             username,
             password,
-            id_role,
+            admin,
             telefone,
         }: IRegisterUserFormData) => {
             const response = await apiClient.post('/users', {
@@ -74,7 +70,7 @@ function FormRegisterUser({ funCloseModal }: IFormRegisterProps) {
                 username,
                 password,
                 telefone,
-                id_role,
+                admin: admin === 'true',
                 id_account: user.id_account,
             });
 
@@ -141,9 +137,8 @@ function FormRegisterUser({ funCloseModal }: IFormRegisterProps) {
 
                 <FormRow countItens={2}>
                     <FormInputSelect
-                        options={data as Role[]}
-                        error={errors.id_role}
-                        {...register('id_role')}
+                        error={errors.admin}
+                        {...register('admin')}
                     />
 
                     <FormInput
