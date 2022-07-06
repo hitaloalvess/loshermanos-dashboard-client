@@ -5,11 +5,7 @@ type User = {
     password?: string;
     username: string;
     telefone: string;
-    role: {
-        id: string;
-        name: string;
-        description: string;
-    };
+    admin: boolean;
     id_account: string;
 };
 
