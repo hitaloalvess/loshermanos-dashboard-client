@@ -6,11 +6,10 @@ import {
 } from 'next';
 import { destroyCookie, parseCookies } from 'nookies';
 
-import { Role } from '../@types';
 import { AuthTokenError } from '../errors/AuthTokenError';
 
 interface IWithSRRAuthOptions {
-    role: string;
+    admin: string;
 }
 
 export const withSSRAuth = <P>(
@@ -33,13 +32,11 @@ export const withSSRAuth = <P>(
         }
 
         if (options) {
-            const {
-                role: { name: userRole },
-            } = decode(token) as any;
+            const { admin: adminToken } = decode(token) as any;
 
-            const { role } = options;
+            const { admin: adminUser } = options;
 
-            if (userRole !== role) {
+            if (adminToken !== adminUser) {
                 return {
                     redirect: {
                         destination: '/dashboard',

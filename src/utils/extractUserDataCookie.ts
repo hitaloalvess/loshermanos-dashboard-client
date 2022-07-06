@@ -16,7 +16,7 @@ export function extractUserDataCookie(
     const token = cookies[nameToken];
 
     try {
-        const { name, email, username, telefone, role, id_account } = decode(
+        const { name, email, username, telefone, admin, id_account } = decode(
             token,
         ) as IPayload;
 
@@ -26,7 +26,7 @@ export function extractUserDataCookie(
                 email,
                 username,
                 telefone,
-                role,
+                admin,
                 id_account,
             },
         };
