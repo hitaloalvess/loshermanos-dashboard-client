@@ -32,7 +32,6 @@ function TableUsers({
                         <TableRow key={bodyItem.id}>
                             <td>{bodyItem.name}</td>
                             <td>{bodyItem.username}</td>
-                            <td>{bodyItem.role.name}</td>
                             <td>{bodyItem.email}</td>
                             <td>{bodyItem.telefone}</td>
                             <td className="buttons">
