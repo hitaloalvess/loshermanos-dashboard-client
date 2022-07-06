@@ -1,15 +1,13 @@
 import { PencilSimple, Trash } from 'phosphor-react';
-import { useContext } from 'react';
 
 import { Customer } from '../../../@types';
-import { AuthContext } from '../../../contexts/AuthContexts';
 import { Button } from '../../Buttons';
 import { TableBody, TableContainer, TableHead, TableRow } from '../styles';
 
 interface ITableProps {
     headerContent: string[];
     bodyContent: Customer[];
-    userRole: string;
+    admin: boolean;
     funActiveModalDelete: (customer: Customer) => void;
     funActiveModalUpdate: (customer: Customer) => void;
 }
@@ -19,7 +17,7 @@ function TableCustomers({
     bodyContent,
     funActiveModalDelete,
     funActiveModalUpdate,
-    userRole,
+    admin,
 }: ITableProps) {
     return (
         <TableContainer>
@@ -42,7 +40,7 @@ function TableCustomers({
                                     new Date(customer.created_at as string),
                                 )}
                             </td>
-                            {userRole === 'admin' && (
+                            {admin && (
                                 <td className="buttons">
                                     {
                                         <>

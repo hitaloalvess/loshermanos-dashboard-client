@@ -109,7 +109,7 @@ export default function Customers({ customers, loggedUser }: ICustomers) {
                     <TableCustomers
                         headerContent={['Nome', 'Endereço', 'Telefone', 'Data']}
                         bodyContent={data as Customer[]}
-                        userRole={loggedUser.role.name}
+                        admin={loggedUser.admin}
                         funActiveModalDelete={activeDeleteModal}
                         funActiveModalUpdate={activeUpdateModal}
                     />
@@ -167,6 +167,6 @@ export const getServerSideProps: GetServerSideProps = withSSRAuth(
         };
     },
     {
-        role: 'admin',
+        admin: true,
     },
 );
