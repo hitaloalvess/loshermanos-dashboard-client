@@ -5,8 +5,7 @@ import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 
-import { Role, User } from '../../../../@types';
-import { useRoles } from '../../../../hooks/useRoles';
+import { User } from '../../../../@types';
 import { apiClient } from '../../../../services/apiClient';
 import { queryClient } from '../../../../services/queryClient';
 import { FormButton } from '../../components/FormButton';
@@ -21,7 +20,7 @@ interface IUpdateUserFormData {
     password: string;
     password_confirmation: string;
     telefone: string;
-    id_role: string;
+    admin: string;
     id_account?: string;
 }
 
@@ -38,12 +37,10 @@ const updateUserFormSchema = yup.object({
         .required('E-mail é obrigatório')
         .email('E-mail inválido'),
     telefone: yup.string().required('Telefone é obrigatório'),
-    id_role: yup.string().required('Cargo é obrigatório'),
+    admin: yup.string().required('Campo admin é obrigatório'),
 });
 
 function FormUpdateUser({ user, funCloseModal }: IFormRegisterProps) {
-    const { data } = useRoles(user.id_account);
-
     const {
         register,
         handleSubmit,
@@ -57,7 +54,7 @@ function FormUpdateUser({ user, funCloseModal }: IFormRegisterProps) {
             name,
             email,
             username,
-            id_role,
+            admin,
             telefone,
         }: IUpdateUserFormData) => {
             const response = await apiClient.put(`/users/${user.id}`, {
@@ -66,7 +63,7 @@ function FormUpdateUser({ user, funCloseModal }: IFormRegisterProps) {
                 username,
                 password: user.password,
                 telefone,
-                id_role,
+                admin: admin === 'true',
                 id_account: user.id_account,
             });
 
@@ -122,10 +119,9 @@ function FormUpdateUser({ user, funCloseModal }: IFormRegisterProps) {
 
                 <FormRow countItens={2}>
                     <FormInputSelect
-                        defaultValue={user.role.id}
-                        options={data as Role[]}
-                        error={errors.id_role}
-                        {...register('id_role')}
+                        defaultValue={user.admin.toString()}
+                        error={errors.admin}
+                        {...register('admin')}
                     />
 
                     <FormInput
