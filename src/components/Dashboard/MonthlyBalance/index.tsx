@@ -51,7 +51,7 @@ function MonthlyBalance({ balance }: IMonthlyBalanceProps) {
                 </MonthlyBalanceSelect>
             </MonthlyBalanceHeader>
 
-            <BalanceChart balance={balance[selectedMonth].data} />
+            <BalanceChart balance={balance[selectedMonth]?.data} />
         </MonthlyBalanceContainer>
     );
 }

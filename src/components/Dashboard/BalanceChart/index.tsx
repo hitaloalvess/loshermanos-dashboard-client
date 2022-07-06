@@ -48,10 +48,13 @@ interface IBalanceChartProps {
 
 export default function BalanceChart({ balance }: IBalanceChartProps) {
     const categories = useMemo(() => {
+        if (!balance) return null;
         return Object.keys(balance);
     }, [balance]);
 
     const series: any = useMemo(() => {
+        if (!balance) return null;
+
         return [{ name: 'Dias', data: Object.values(balance) }];
     }, [balance]);
 
@@ -62,5 +65,9 @@ export default function BalanceChart({ balance }: IBalanceChartProps) {
         },
     };
 
-    return <Chart options={options} series={series} type="area" height={240} />;
+    return (
+        balance && (
+            <Chart options={options} series={series} type="area" height={240} />
+        )
+    );
 }
