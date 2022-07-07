@@ -153,20 +153,15 @@ export default function Users({ loggedUser, users }: IUsersProps) {
     );
 }
 
-export const getServerSideProps: GetServerSideProps = withSSRAuth(
-    async ctx => {
-        const { user } = extractUserDataCookie('@LosHermanosDash.token', ctx);
+export const getServerSideProps: GetServerSideProps = withSSRAuth(async ctx => {
+    const { user } = extractUserDataCookie('@LosHermanosDash.token', ctx);
 
-        const users = await getUsersServerSide(user.id_account, ctx);
+    const users = await getUsersServerSide(user.id_account, ctx);
 
-        return {
-            props: {
-                loggedUser: { ...user },
-                users,
-            },
-        };
-    },
-    {
-        admin: true,
-    },
-);
+    return {
+        props: {
+            loggedUser: { ...user },
+            users,
+        },
+    };
+});

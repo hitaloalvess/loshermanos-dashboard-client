@@ -153,20 +153,15 @@ export default function Customers({ customers, loggedUser }: ICustomers) {
     );
 }
 
-export const getServerSideProps: GetServerSideProps = withSSRAuth(
-    async ctx => {
-        const { user } = extractUserDataCookie('@LosHermanosDash.token', ctx);
+export const getServerSideProps: GetServerSideProps = withSSRAuth(async ctx => {
+    const { user } = extractUserDataCookie('@LosHermanosDash.token', ctx);
 
-        const customers = await getCustomersServerSide(user.id_account, ctx);
+    const customers = await getCustomersServerSide(user.id_account, ctx);
 
-        return {
-            props: {
-                loggedUser: { ...user },
-                customers,
-            },
-        };
-    },
-    {
-        admin: true,
-    },
-);
+    return {
+        props: {
+            loggedUser: { ...user },
+            customers,
+        },
+    };
+});
