@@ -8,7 +8,6 @@ import { ProductsListContainer, ProductsListContent } from './styles';
 interface IProductsListProps {
     products?: Product[];
     saleProducts?: Product[];
-    typeCard?: 'cardForSales' | undefined;
     funUpdateProduct?: (product: Product) => void;
     funDeleteProduct?: (product: Product) => void;
     funAddProduct?: (product: Product) => void;

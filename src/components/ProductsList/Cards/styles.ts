@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface IProductCardBannerProps {
+    userIsAdmin: boolean;
+}
+
 const ProductCardContainer = styled.div`
     width: 18rem;
     height: 18rem;
@@ -7,16 +11,17 @@ const ProductCardContainer = styled.div`
     background-color: var(--dark-surface-primary);
 `;
 
-const ProductCardBanner = styled.div`
+const ProductCardBanner = styled.div<IProductCardBannerProps>`
     position: relative;
     width: 100%;
-    height: 14rem;
+    height: ${props => (props.userIsAdmin ? `14rem` : `100%`)};
 
     img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         border-radius: 5px 5px 0 0;
+        border-radius: ${props => (props.userIsAdmin ? `5px 5px 0 0` : `5px`)};
     }
 
     &::after {

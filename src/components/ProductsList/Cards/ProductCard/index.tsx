@@ -1,6 +1,8 @@
 import { Minus, PencilSimple, Plus, Trash } from 'phosphor-react';
+import { useContext } from 'react';
 
 import { Product } from '../../../../@types';
+import { AuthContext } from '../../../../contexts/AuthContexts';
 import { formatInReal } from '../../../../utils/formatInReal';
 import { Button } from '../../../Buttons';
 import { OnlyAdminAllowed } from '../../../OnlyAdminAllowed';
@@ -23,9 +25,13 @@ function ProductCard({
     funUpdateProduct,
     funDeleteProduct,
 }: IProductCardProps) {
+    const {
+        user: { admin },
+    } = useContext(AuthContext);
+
     return (
         <ProductCardContainer>
-            <ProductCardBanner>
+            <ProductCardBanner userIsAdmin={admin}>
                 <img
                     src={`${process.env.BASE_URL_IMAGE_LOCAL}/${product.image_name}`}
                     alt="imagem do card do produto"
