@@ -44,7 +44,10 @@ const registerProductFormSchema = yup.object({
             return false;
         }),
     description: yup.string().required('Descrição é obrigatório'),
-    price: yup.number().required('Preço é obrigatório'),
+    price: yup
+        .number()
+        .typeError('Preço é obrigatório')
+        .required('Preço é obrigatório'),
 });
 
 function FormRegisterProduct({ funCloseModal }: IFormRegisterProduct) {

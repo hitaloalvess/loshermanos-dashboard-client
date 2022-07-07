@@ -113,6 +113,7 @@ function FormSignUp() {
                     {...register('password')}
                 />
                 <FormInput
+                    type="password"
                     placeholder="Confirmar senha"
                     error={errors.password_confirmation}
                     {...register('password_confirmation')}
