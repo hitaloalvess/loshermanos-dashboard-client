@@ -12,7 +12,7 @@ function calculateDailyTotal(currentDate: string, sales: Sale[]) {
     );
 
     const total = salesOfTheDay?.reduce((acc: number, sale: Sale) => {
-        return acc + sale.total;
+        return Number(acc) + Number(sale.total);
     }, 0);
 
     return formatInReal(total);
