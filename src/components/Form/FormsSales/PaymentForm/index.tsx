@@ -74,6 +74,7 @@ function PaymentForm({ sale, funCloseModal }: IPaymentFormProps) {
                 `/sales/payment/${sale.id}`,
                 {
                     value_pay: valuePay,
+                    descount: sale.descount,
                 },
             );
 
