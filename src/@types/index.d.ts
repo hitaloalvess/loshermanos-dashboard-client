@@ -28,6 +28,7 @@ type Product = {
     description: string;
     price: number;
     image_name: string;
+    url: string;
     amount?: number;
     created_at?: string;
     id_account: string;

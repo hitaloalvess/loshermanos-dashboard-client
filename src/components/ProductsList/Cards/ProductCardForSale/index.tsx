@@ -43,7 +43,7 @@ function ProductCardForSales({
         <ProductCardContainer>
             <ProductCardBanner isCardForSales>
                 <img
-                    src={`${process.env.BASE_URL_IMAGE_LOCAL}/${product.image_name}`}
+                    src={product.url}
                     alt="imagem do card do produto"
                     loading="lazy"
                 />
