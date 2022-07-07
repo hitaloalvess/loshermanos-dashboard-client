@@ -41,7 +41,7 @@ function ProductCardForSales({
 
     return (
         <ProductCardContainer>
-            <ProductCardBanner>
+            <ProductCardBanner isCardForSales>
                 <img
                     src={`${process.env.BASE_URL_IMAGE_LOCAL}/${product.image_name}`}
                     alt="imagem do card do produto"
