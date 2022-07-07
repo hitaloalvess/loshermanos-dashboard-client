@@ -2,6 +2,7 @@ import { PencilSimple, Trash } from 'phosphor-react';
 
 import { User } from '../../../@types';
 import { Button } from '../../Buttons';
+import { OnlyAdminAllowed } from '../../OnlyAdminAllowed';
 import { TableBody, TableContainer, TableHead, TableRow } from '../styles';
 
 interface ITableProps {
@@ -34,37 +35,39 @@ function TableUsers({
                             <td>{bodyItem.username}</td>
                             <td>{bodyItem.email}</td>
                             <td>{bodyItem.telefone}</td>
-                            <td className="buttons">
-                                {
-                                    <>
-                                        <Button
-                                            type="edit"
-                                            onClick={() =>
-                                                funActiveModalUpdate(
-                                                    bodyItem as User,
-                                                )
-                                            }
-                                        >
-                                            <>
-                                                <PencilSimple />
-                                            </>
-                                        </Button>
+                            <OnlyAdminAllowed>
+                                <td className="buttons">
+                                    {
+                                        <>
+                                            <Button
+                                                type="edit"
+                                                onClick={() =>
+                                                    funActiveModalUpdate(
+                                                        bodyItem as User,
+                                                    )
+                                                }
+                                            >
+                                                <>
+                                                    <PencilSimple />
+                                                </>
+                                            </Button>
 
-                                        <Button
-                                            type="delete"
-                                            onClick={() =>
-                                                funActiveModalDelete(
-                                                    bodyItem as User,
-                                                )
-                                            }
-                                        >
-                                            <>
-                                                <Trash />
-                                            </>
-                                        </Button>
-                                    </>
-                                }
-                            </td>
+                                            <Button
+                                                type="delete"
+                                                onClick={() =>
+                                                    funActiveModalDelete(
+                                                        bodyItem as User,
+                                                    )
+                                                }
+                                            >
+                                                <>
+                                                    <Trash />
+                                                </>
+                                            </Button>
+                                        </>
+                                    }
+                                </td>
+                            </OnlyAdminAllowed>
                         </TableRow>
                     ))}
             </TableBody>

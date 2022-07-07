@@ -11,6 +11,7 @@ import {
     FormRegisterProduct,
     FormUpdateProduct,
     ModalContainer,
+    OnlyAdminAllowed,
     PageContainer,
 } from '../../components';
 import { ProductsList } from '../../components/ProductsList';
@@ -141,12 +142,17 @@ export default function Products({ loggedUser }: IProductsProps) {
                 <ContentProducts>
                     <ContentProductsHeader>
                         <h1>Produtos</h1>
-                        <Button onClick={() => setIsOpenRegisterModal(true)}>
-                            <>
-                                <Plus />
-                                <p>Adicionar produto</p>
-                            </>
-                        </Button>
+
+                        <OnlyAdminAllowed>
+                            <Button
+                                onClick={() => setIsOpenRegisterModal(true)}
+                            >
+                                <>
+                                    <Plus />
+                                    <p>Adicionar produto</p>
+                                </>
+                            </Button>
+                        </OnlyAdminAllowed>
                     </ContentProductsHeader>
                     <ProductsList
                         products={formattedData as Product[]}

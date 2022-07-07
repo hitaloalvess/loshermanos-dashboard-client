@@ -1,8 +1,9 @@
 import { Minus, PencilSimple, Plus, Trash } from 'phosphor-react';
 
-import { Product, SaleProduct } from '../../../../@types';
+import { Product } from '../../../../@types';
 import { formatInReal } from '../../../../utils/formatInReal';
 import { Button } from '../../../Buttons';
+import { OnlyAdminAllowed } from '../../../OnlyAdminAllowed';
 import {
     ProductCardActions,
     ProductCardBanner,
@@ -12,7 +13,7 @@ import {
 } from '../styles';
 
 interface IProductCardProps {
-    product: Product | SaleProduct;
+    product: Product;
     funUpdateProduct?: (product: Product) => void;
     funDeleteProduct?: (product: Product) => void;
 }
@@ -38,24 +39,26 @@ function ProductCard({
                 </ProductCardTitle>
             </ProductCardBanner>
 
-            <ProductCardActions>
-                {funDeleteProduct && funUpdateProduct && (
-                    <>
-                        <Button
-                            type="edit"
-                            onClick={() => funUpdateProduct(product)}
-                        >
-                            <PencilSimple />
-                        </Button>
-                        <Button
-                            type="delete"
-                            onClick={() => funDeleteProduct(product)}
-                        >
-                            <Trash />
-                        </Button>
-                    </>
-                )}
-            </ProductCardActions>
+            <OnlyAdminAllowed>
+                <ProductCardActions>
+                    {funDeleteProduct && funUpdateProduct && (
+                        <>
+                            <Button
+                                type="edit"
+                                onClick={() => funUpdateProduct(product)}
+                            >
+                                <PencilSimple />
+                            </Button>
+                            <Button
+                                type="delete"
+                                onClick={() => funDeleteProduct(product)}
+                            >
+                                <Trash />
+                            </Button>
+                        </>
+                    )}
+                </ProductCardActions>
+            </OnlyAdminAllowed>
         </ProductCardContainer>
     );
 }

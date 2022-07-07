@@ -2,6 +2,7 @@ import { PencilSimple, Trash } from 'phosphor-react';
 
 import { Customer } from '../../../@types';
 import { Button } from '../../Buttons';
+import { OnlyAdminAllowed } from '../../OnlyAdminAllowed';
 import { TableBody, TableContainer, TableHead, TableRow } from '../styles';
 
 interface ITableProps {
@@ -17,7 +18,6 @@ function TableCustomers({
     bodyContent,
     funActiveModalDelete,
     funActiveModalUpdate,
-    admin,
 }: ITableProps) {
     return (
         <TableContainer>
@@ -40,7 +40,7 @@ function TableCustomers({
                                     new Date(customer.created_at as string),
                                 )}
                             </td>
-                            {admin && (
+                            <OnlyAdminAllowed>
                                 <td className="buttons">
                                     {
                                         <>
@@ -72,7 +72,7 @@ function TableCustomers({
                                         </>
                                     }
                                 </td>
-                            )}
+                            </OnlyAdminAllowed>
                         </TableRow>
                     ))}
             </TableBody>

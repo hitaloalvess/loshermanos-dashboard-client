@@ -10,6 +10,7 @@ import {
     FormRegisterUser,
     FormUpdateUser,
     ModalContainer,
+    OnlyAdminAllowed,
     PageContainer,
     TableUsers,
 } from '../../components';
@@ -95,12 +96,17 @@ export default function Users({ loggedUser, users }: IUsersProps) {
                 <ContentUsers>
                     <ContentUsersHeader>
                         <h1>Usuários</h1>
-                        <Button onClick={() => setIsOpenRegisterModal(true)}>
-                            <>
-                                <Plus />
-                                <p>Adicionar usuário</p>
-                            </>
-                        </Button>
+
+                        <OnlyAdminAllowed>
+                            <Button
+                                onClick={() => setIsOpenRegisterModal(true)}
+                            >
+                                <>
+                                    <Plus />
+                                    <p>Adicionar usuário</p>
+                                </>
+                            </Button>
+                        </OnlyAdminAllowed>
                     </ContentUsersHeader>
                     <TableUsers
                         headerContent={[

@@ -3,6 +3,7 @@ import { CreditCard, PencilSimple, Trash } from 'phosphor-react';
 import { Sale } from '../../../@types';
 import { formatInReal } from '../../../utils/formatInReal';
 import { Button } from '../../Buttons';
+import { OnlyAdminAllowed } from '../../OnlyAdminAllowed';
 import { TableBody, TableContainer, TableHead, TableRow } from '../styles';
 import { StatusContainer } from './styles';
 
@@ -25,7 +26,6 @@ interface ICalcTotalSaleParams {
 function TableSales({
     headerContent,
     bodyContent,
-    admin,
     funActiveModalDelete,
     funUpdateSale,
     funActiveModalPayment,
@@ -81,7 +81,7 @@ function TableSales({
                                     new Date(sale.created_at as string),
                                 )}
                             </td>
-                            {admin && (
+                            <OnlyAdminAllowed>
                                 <td className="buttons">
                                     {
                                         <>
@@ -126,7 +126,7 @@ function TableSales({
                                         </>
                                     }
                                 </td>
-                            )}
+                            </OnlyAdminAllowed>
                         </TableRow>
                     ))}
             </TableBody>
