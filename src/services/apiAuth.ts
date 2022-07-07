@@ -96,7 +96,6 @@ export function setupClient(ctx?: GetServerSidePropsContext) {
                         });
                     });
                 }
-            } else {
                 signOut(ctx);
             }
 
