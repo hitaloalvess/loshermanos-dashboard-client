@@ -67,7 +67,7 @@ function generateBalance(sales: Sale[]) {
                       ...months,
                       [month]: {
                           ...currentMonth,
-                          [day]: Number(currentMonth[day]) + sale.total,
+                          [day]: Number(currentMonth[day]) + Number(sale.total),
                       },
                   })
                 : (newMonths = {
@@ -77,7 +77,6 @@ function generateBalance(sales: Sale[]) {
                           [day]: sale.total,
                       },
                   });
-
             months = newMonths;
         }
     }
