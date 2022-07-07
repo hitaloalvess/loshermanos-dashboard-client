@@ -28,6 +28,9 @@ function MyApp({ Component, pageProps }: AppProps) {
                     draggable
                     pauseOnHover
                     theme="colored"
+                    style={{
+                        zIndex: 9999999999,
+                    }}
                 />
                 <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>

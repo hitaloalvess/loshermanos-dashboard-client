@@ -27,6 +27,9 @@ function ModalContainer({
 }: IModalProps) {
     return (
         <Modal
+            parentSelector={() =>
+                document.querySelector('#__next') as HTMLElement
+            }
             style={{
                 ...customStyles,
                 content: {
