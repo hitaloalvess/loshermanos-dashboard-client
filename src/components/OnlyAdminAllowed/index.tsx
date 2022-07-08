@@ -3,16 +3,16 @@ import { ReactElement } from 'react';
 
 import { extractUserDataCookie } from '../../utils/extractUserDataCookie';
 
-interface IOnlyAdminAllowed {
+export interface IOnlyAdminAllowedProps {
     children: ReactElement;
 }
-function OnlyAdminAllowed({ children }: IOnlyAdminAllowed) {
+function OnlyAdminAllowed({ children }: IOnlyAdminAllowedProps) {
     const {
         user: { admin },
     } = extractUserDataCookie('@LosHermanosDash.token');
 
     if (!admin) {
-        return null;
+        return <></>;
     }
 
     return <>{children}</>;

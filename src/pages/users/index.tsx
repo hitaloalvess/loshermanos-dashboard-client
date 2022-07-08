@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import dynamic from 'next/dynamic';
 import { Plus } from 'phosphor-react';
 import { useCallback, useState } from 'react';
 import { useMutation } from 'react-query';
@@ -9,8 +10,8 @@ import {
     Button,
     FormRegisterUser,
     FormUpdateUser,
+    IOnlyAdminAllowedProps,
     ModalContainer,
-    OnlyAdminAllowed,
     PageContainer,
     TableUsers,
 } from '../../components';
@@ -21,6 +22,14 @@ import { queryClient } from '../../services/queryClient';
 import { extractUserDataCookie } from '../../utils/extractUserDataCookie';
 import { withSSRAuth } from '../../utils/withSSRAuth';
 import { ContentUsers, ContentUsersHeader } from './styles';
+
+const OnlyAdminAllowed = dynamic<IOnlyAdminAllowedProps>(
+    () =>
+        import('../../components/OnlyAdminAllowed').then(
+            ({ OnlyAdminAllowed }) => OnlyAdminAllowed,
+        ),
+    { ssr: false },
+);
 
 interface IUsersProps {
     users: User[];

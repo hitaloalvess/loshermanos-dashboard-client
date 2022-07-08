@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { Minus, PencilSimple, Plus, Trash } from 'phosphor-react';
 import { useContext } from 'react';
 
@@ -5,7 +6,7 @@ import { Product } from '../../../../@types';
 import { AuthContext } from '../../../../contexts/AuthContexts';
 import { formatInReal } from '../../../../utils/formatInReal';
 import { Button } from '../../../Buttons';
-import { OnlyAdminAllowed } from '../../../OnlyAdminAllowed';
+import { IOnlyAdminAllowedProps } from '../../../OnlyAdminAllowed';
 import {
     ProductCardActions,
     ProductCardBanner,
@@ -13,6 +14,14 @@ import {
     ProductCardPrice,
     ProductCardTitle,
 } from '../styles';
+
+const OnlyAdminAllowed = dynamic<IOnlyAdminAllowedProps>(
+    () =>
+        import('../../../OnlyAdminAllowed').then(
+            ({ OnlyAdminAllowed }) => OnlyAdminAllowed,
+        ),
+    { ssr: false },
+);
 
 interface IProductCardProps {
     product: Product;

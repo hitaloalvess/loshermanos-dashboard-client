@@ -1,9 +1,18 @@
+import dynamic from 'next/dynamic';
 import { PencilSimple, Trash } from 'phosphor-react';
 
 import { Customer } from '../../../@types';
 import { Button } from '../../Buttons';
-import { OnlyAdminAllowed } from '../../OnlyAdminAllowed';
+import { IOnlyAdminAllowedProps } from '../../OnlyAdminAllowed';
 import { TableBody, TableContainer, TableHead, TableRow } from '../styles';
+
+const OnlyAdminAllowed = dynamic<IOnlyAdminAllowedProps>(
+    () =>
+        import('../../OnlyAdminAllowed').then(
+            ({ OnlyAdminAllowed }) => OnlyAdminAllowed,
+        ),
+    { ssr: false },
+);
 
 interface ITableProps {
     headerContent: string[];

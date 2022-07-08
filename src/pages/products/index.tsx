@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
+import dynamic, { DynamicOptions } from 'next/dynamic';
 import { Plus } from 'phosphor-react';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useInfiniteQuery, useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 
@@ -11,9 +12,9 @@ import {
     FormRegisterProduct,
     FormUpdateProduct,
     ModalContainer,
-    OnlyAdminAllowed,
     PageContainer,
 } from '../../components';
+import { IOnlyAdminAllowedProps } from '../../components/OnlyAdminAllowed';
 import { ProductsList } from '../../components/ProductsList';
 import { apiClient } from '../../services/apiClient';
 import { queryClient } from '../../services/queryClient';
@@ -24,6 +25,14 @@ import {
     ContentProducts,
     ContentProductsHeader,
 } from './styles';
+
+const OnlyAdminAllowed = dynamic<IOnlyAdminAllowedProps>(
+    () =>
+        import('../../components/OnlyAdminAllowed').then(
+            ({ OnlyAdminAllowed }) => OnlyAdminAllowed,
+        ),
+    { ssr: false },
+);
 
 interface IProductsProps {
     loggedUser: User;
