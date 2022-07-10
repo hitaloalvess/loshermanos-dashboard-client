@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
 
-import { SideBarButtonLogout } from './SideBarButtonLogout';
 import { SideBarButtonToggle } from './SideBarButtonToggle';
 import { SideBarListItem } from './SideBarListItem';
 import { SideBarContainer } from './styles';
@@ -8,12 +7,9 @@ import { SideBarContainer } from './styles';
 function SideBar() {
     const [isToggleActive, setIsToggleActive] = useState(false);
 
-    const activateToggle = useCallback(
-        (isActive: boolean) => {
-            setIsToggleActive(isActive);
-        },
-        [isToggleActive],
-    );
+    const activateToggle = useCallback((isActive: boolean) => {
+        setIsToggleActive(isActive);
+    }, []);
 
     return (
         <SideBarContainer>

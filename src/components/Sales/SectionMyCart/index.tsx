@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Minus, Plus, ShoppingCart } from 'phosphor-react';
 
 import { Product } from '../../../@types';
@@ -75,7 +76,7 @@ function SectionMyCart({
                         listProducts.map(product => (
                             <SectionMyCartItem key={product.id}>
                                 <MyCartItemImage>
-                                    <img
+                                    <Image
                                         src={product.url}
                                         alt={`Image da ${product.url} contido no carrinho`}
                                     />

@@ -51,7 +51,7 @@ function FormInputSearch({
             getItem(item);
             firstRender = false;
         }
-    }, [inputValue]);
+    }, [inputValue, getItem, items, register.name, setValue]);
 
     const handleInputBlur = (name: string) => {
         const item = items.find(item => item.name === name);

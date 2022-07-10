@@ -1,4 +1,5 @@
-import { Minus, PencilSimple, Plus, Trash } from 'phosphor-react';
+import Image from 'next/image';
+import { Minus, Plus } from 'phosphor-react';
 import { useEffect, useState } from 'react';
 
 import { Product } from '../../../../@types';
@@ -37,12 +38,12 @@ function ProductCardForSales({
         } else {
             funRemoveProduct(item);
         }
-    }, [count]);
+    }, [count, funAddProduct, funRemoveProduct, product]);
 
     return (
         <ProductCardContainer>
             <ProductCardBanner isCardForSales>
-                <img
+                <Image
                     src={product.url}
                     alt="imagem do card do produto"
                     loading="lazy"

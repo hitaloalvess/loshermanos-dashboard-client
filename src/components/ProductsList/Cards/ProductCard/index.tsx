@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
-import { Minus, PencilSimple, Plus, Trash } from 'phosphor-react';
+import Image from 'next/image';
+import { PencilSimple, Trash } from 'phosphor-react';
 import { useContext } from 'react';
 
 import { Product } from '../../../../@types';
@@ -41,7 +42,7 @@ function ProductCard({
     return (
         <ProductCardContainer>
             <ProductCardBanner userIsAdmin={admin}>
-                <img
+                <Image
                     src={product.url}
                     alt="imagem do card do produto"
                     loading="lazy"

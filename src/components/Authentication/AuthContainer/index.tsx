@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ReactElement } from 'react';
 
 import { Banner, ContainerAuth, ContentAuth } from './styles';
@@ -11,7 +12,7 @@ function AuthContainer({ imageSrc, sideImage, children }: IAuthContainerProps) {
     return (
         <ContainerAuth>
             <Banner sideImage={sideImage}>
-                <img
+                <Image
                     src={imageSrc}
                     alt="imagem do painel de authenticação"
                     loading="lazy"
