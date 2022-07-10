@@ -62,18 +62,18 @@ export default function Users({ loggedUser, users }: IUsersProps) {
 
     const closeRegisterModal = useCallback(() => {
         setIsOpenRegisterModal(false);
-    }, [isOpenRegisterModal]);
+    }, []);
 
     const closeUpdateModal = useCallback(() => {
         setIsOpenUpdateModal(false);
-    }, [isOpenUpdateModal]);
+    }, []);
 
     const activeDeleteModal = useCallback(
         (user: User) => {
             setUserSelected(user);
             setIsOpenDeleteModal(true);
         },
-        [userSelected, isOpenDeleteModal],
+        [userSelected],
     );
 
     const activeUpdateModal = useCallback(
@@ -81,7 +81,7 @@ export default function Users({ loggedUser, users }: IUsersProps) {
             setUserSelected(user);
             setIsOpenUpdateModal(true);
         },
-        [userSelected, isOpenUpdateModal],
+        [userSelected],
     );
 
     const handleDeleteUser = useCallback(
@@ -96,7 +96,7 @@ export default function Users({ loggedUser, users }: IUsersProps) {
                 setUserSelected({} as User);
             }
         },
-        [userSelected],
+        [userSelected, deleteUser],
     );
 
     return (

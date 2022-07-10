@@ -38,31 +38,25 @@ export default function Sales({ loggedUser, sales }: ISalesProps) {
         },
     );
 
-    const activePaymentModal = useCallback(
-        (sale: Sale) => {
-            setIsOpenPaymentModal(true);
-            setSaleSelected(sale);
-        },
-        [isOpenPaymentModal, saleSelected],
-    );
+    const activePaymentModal = useCallback((sale: Sale) => {
+        setIsOpenPaymentModal(true);
+        setSaleSelected(sale);
+    }, []);
 
     const funClosePaymentModal = useCallback(() => {
         setIsOpenPaymentModal(false);
         setSaleSelected({} as Sale);
-    }, [saleSelected, isOpenPaymentModal]);
+    }, []);
 
-    const activeDeleteModal = useCallback(
-        (sale: Sale) => {
-            setIsOpenDeleteModal(true);
-            setSaleSelected(sale);
-        },
-        [isOpenDeleteModal, saleSelected],
-    );
+    const activeDeleteModal = useCallback((sale: Sale) => {
+        setIsOpenDeleteModal(true);
+        setSaleSelected(sale);
+    }, []);
 
     const funCloseDeleteModal = useCallback(() => {
         setIsOpenDeleteModal(false);
         setSaleSelected({} as Sale);
-    }, [saleSelected, isOpenPaymentModal]);
+    }, []);
 
     const deleteSale = useMutation(
         async (saleId: string) => {
@@ -74,20 +68,17 @@ export default function Sales({ loggedUser, sales }: ISalesProps) {
         },
     );
 
-    const handleDeleteSale = useCallback(
-        async (saleId: string) => {
-            try {
-                await deleteSale.mutateAsync(saleId);
-                toast.success('venda removida com sucesso');
-                setIsOpenDeleteModal(false);
-            } catch (error: any) {
-                toast.error(error.message);
-            } finally {
-                setSaleSelected({} as Sale);
-            }
-        },
-        [saleSelected],
-    );
+    const handleDeleteSale = useCallback(async (saleId: string) => {
+        try {
+            await deleteSale.mutateAsync(saleId);
+            toast.success('venda removida com sucesso');
+            setIsOpenDeleteModal(false);
+        } catch (error: any) {
+            toast.error(error.message);
+        } finally {
+            setSaleSelected({} as Sale);
+        }
+    }, []);
 
     return (
         <PageContainer userName={loggedUser.name}>

@@ -66,7 +66,7 @@ function PaymentForm({ sale, funCloseModal }: IPaymentFormProps) {
 
     useEffect(() => {
         setValue('valueTotal', calculateAmountPayable);
-    }, [calculateAmountPayable]);
+    }, [calculateAmountPayable, setValue]);
 
     const payment = useMutation(
         async ({ valuePay }: IPaymentSaleFormData) => {

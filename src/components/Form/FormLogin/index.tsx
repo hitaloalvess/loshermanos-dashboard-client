@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import Link from 'next/link';
 import { User, Lock } from 'phosphor-react';
 import { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -61,7 +62,7 @@ function FormLogin() {
 
             <RegisterNow>
                 <p>Não tem uma conta?</p>
-                <a href="/signup">Registre-se agora</a>
+                <Link href="/signup">Registre-se agora</Link>
             </RegisterNow>
         </FormLoginContainer>
     );

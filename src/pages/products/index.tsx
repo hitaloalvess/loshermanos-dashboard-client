@@ -116,34 +116,28 @@ export default function Products({ loggedUser }: IProductsProps) {
                 setProductSelected({} as Product);
             }
         },
-        [productSelected],
+        [deleteProduct],
     );
 
-    const activeUpdateModal = useCallback(
-        (product: Product) => {
-            setProductSelected(product);
-            setIsOpenUpdateModal(true);
-        },
-        [productSelected, isOpenUpdateModal],
-    );
+    const activeUpdateModal = useCallback((product: Product) => {
+        setProductSelected(product);
+        setIsOpenUpdateModal(true);
+    }, []);
 
-    const activeDeleteModal = useCallback(
-        (product: Product) => {
-            setProductSelected(product);
-            setIsOpenDeleteModal(true);
-        },
-        [productSelected, isOpenDeleteModal],
-    );
+    const activeDeleteModal = useCallback((product: Product) => {
+        setProductSelected(product);
+        setIsOpenDeleteModal(true);
+    }, []);
 
     const funCloseDeleteModal = useCallback(() => {
         setIsOpenDeleteModal(false);
         setProductSelected({} as Product);
-    }, [isOpenDeleteModal, productSelected]);
+    }, []);
 
     const funCloseUpdateModal = useCallback(() => {
         setIsOpenUpdateModal(false);
         setProductSelected({} as Product);
-    }, [isOpenUpdateModal, productSelected]);
+    }, []);
 
     return (
         <PageContainer userName={loggedUser.name}>

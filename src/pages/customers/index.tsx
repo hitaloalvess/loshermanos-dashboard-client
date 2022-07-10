@@ -52,21 +52,15 @@ export default function Customers({ customers, loggedUser }: ICustomers) {
         },
     );
 
-    const activeDeleteModal = useCallback(
-        (customer: Customer) => {
-            setCustomerSelected(customer);
-            setIsOpenDeleteModal(true);
-        },
-        [customerSelected, isOpenDeleteModal],
-    );
+    const activeDeleteModal = useCallback((customer: Customer) => {
+        setCustomerSelected(customer);
+        setIsOpenDeleteModal(true);
+    }, []);
 
-    const activeUpdateModal = useCallback(
-        (customer: Customer) => {
-            setCustomerSelected(customer);
-            setIsOpenUpdateModal(true);
-        },
-        [customerSelected, isOpenUpdateModal],
-    );
+    const activeUpdateModal = useCallback((customer: Customer) => {
+        setCustomerSelected(customer);
+        setIsOpenUpdateModal(true);
+    }, []);
 
     const handleDeleteCustomer = useCallback(
         async (userId: string) => {
@@ -80,18 +74,18 @@ export default function Customers({ customers, loggedUser }: ICustomers) {
                 setCustomerSelected({} as Customer);
             }
         },
-        [customerSelected],
+        [deleteCustomer],
     );
 
     const closeModalRegister = useCallback(() => {
         setIsOpenRegisterModal(false);
         setCustomerSelected({} as Customer);
-    }, [isOpenRegisterModal, customerSelected]);
+    }, []);
 
     const funCloseDeleteModal = useCallback(() => {
         setIsOpenDeleteModal(false);
         setCustomerSelected({} as Customer);
-    }, [isOpenDeleteModal, customerSelected]);
+    }, []);
 
     return (
         <PageContainer userName={loggedUser.name}>

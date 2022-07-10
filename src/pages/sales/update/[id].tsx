@@ -47,7 +47,7 @@ export default function UpdateSale({
             };
         });
         setListProducts(listProducts);
-    }, [products]);
+    }, [products, listSelectedProducts]);
 
     const totalSale = useMemo(() => {
         const total = listSelectedProducts.reduce((total, product) => {
@@ -90,7 +90,7 @@ export default function UpdateSale({
 
             updateListProducts(product);
         },
-        [listSelectedProducts, listProducts],
+        [listSelectedProducts, listProducts, updateListProducts],
     );
 
     const removeProductFromSelectedList = useCallback(
@@ -102,7 +102,7 @@ export default function UpdateSale({
 
             updateListProducts(product);
         },
-        [listSelectedProducts, listProducts],
+        [listSelectedProducts, listProducts, updateListProducts],
     );
 
     const updateStage = useCallback(
@@ -114,7 +114,7 @@ export default function UpdateSale({
 
             setCurrentStage(currentStage);
         },
-        [listSelectedProducts, currentStage],
+        [listSelectedProducts],
     );
 
     return (
