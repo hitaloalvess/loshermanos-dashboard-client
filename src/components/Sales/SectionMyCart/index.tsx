@@ -79,6 +79,8 @@ function SectionMyCart({
                                     <Image
                                         src={product.url}
                                         alt={`Image da ${product.url} contido no carrinho`}
+                                        loading="lazy"
+                                        layout="fill"
                                     />
                                 </MyCartItemImage>
                                 <MyCartItemTitle>

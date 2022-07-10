@@ -46,6 +46,7 @@ function ProductCard({
                     src={product.url}
                     alt="imagem do card do produto"
                     loading="lazy"
+                    layout="fill"
                 />
                 <ProductCardPrice>
                     <p>{`${formatInReal(product.price)}`}</p>

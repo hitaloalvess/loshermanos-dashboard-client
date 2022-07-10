@@ -16,6 +16,7 @@ function AuthContainer({ imageSrc, sideImage, children }: IAuthContainerProps) {
                     src={imageSrc}
                     alt="imagem do painel de authenticação"
                     loading="lazy"
+                    layout="fill"
                 />
             </Banner>
             <ContentAuth contentSide={sideImage === 'left' ? 'right' : 'left'}>
