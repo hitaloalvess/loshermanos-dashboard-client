@@ -18,7 +18,7 @@
         "phosphor-react": "^1.4.1",
         "react": "18.1.0",
         "react-apexcharts": "^1.4.0",
-        "react-circular-progressbar": "^2.0.4",
+        "react-circular-progressbar": "^2.1.0",
         "react-dom": "18.1.0",
         "react-hook-form": "^7.31.3",
         "react-modal": "^3.15.1",
