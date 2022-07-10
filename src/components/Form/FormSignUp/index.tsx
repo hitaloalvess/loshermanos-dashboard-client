@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 
-import { api } from '../../../services/api';
+import { apiClient } from '../../../services/apiClient';
 import { FormButton } from '../components/FormButton';
 import { FormInput } from '../components/FormInput';
 import {
@@ -59,7 +59,7 @@ function FormSignUp() {
         telefone,
         name_stablishment,
     }: ISignUpFormData): Promise<AxiosResponse> => {
-        const response = await api.post('/account', {
+        const response = await apiClient.post('/account', {
             name,
             email,
             username,

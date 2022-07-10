@@ -30,7 +30,6 @@ function SectionAddProducts({
         <AddProductsContainer>
             <ProductsList
                 saleProducts={listProducts}
-                typeCard="cardForSales"
                 funAddProduct={funAddProduct}
                 funRemoveProduct={funRemoveProduct}
             ></ProductsList>

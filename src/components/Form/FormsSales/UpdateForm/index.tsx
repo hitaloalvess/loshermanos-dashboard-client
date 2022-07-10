@@ -139,17 +139,6 @@ function UpdateForm({
                 </FormRow>
 
                 <FormRow countItens={1}>
-                    {/* <FormInput
-                        placeholder="dd/MM/YY"
-                        defaultValue={new Intl.DateTimeFormat('pt-BR').format(
-                            new Date(),
-                        )}
-                        error={errors.date}
-                        {...register('date')}
-                    >
-                        <CalendarBlank />
-                    </FormInput> */}
-
                     <FormInput
                         type="number"
                         placeholder="Desconto"

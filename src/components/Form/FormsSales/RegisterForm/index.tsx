@@ -1,12 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import router from 'next/router';
-import {
-    CalendarBlank,
-    CurrencyCircleDollar,
-    NotePencil,
-    Ticket,
-    User,
-} from 'phosphor-react';
+import { CurrencyCircleDollar, NotePencil, Ticket, User } from 'phosphor-react';
 import { useContext, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
@@ -114,7 +108,7 @@ function RegisterForm({
             toast.success('Venda cadastrada com sucesso');
             router.push('/sales');
         } catch (error: any) {
-            toast.error(error.message);
+            toast.error(error.response.data.message);
         }
     };
 

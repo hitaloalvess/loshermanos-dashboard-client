@@ -33,9 +33,7 @@ const updateProductFormSchema = yup.object({
 
 function FormUpdateProduct({ product, funCloseModal }: IFormUpdateProduct) {
     const [imageUrl, setImageUrl] = useState(product.image_name);
-    const [localImageUrl, setLocalImageUrl] = useState(
-        `${process.env.BASE_URL_IMAGE_LOCAL}/${product.image_name}`,
-    );
+    const [localImageUrl, setLocalImageUrl] = useState(product.url);
 
     const {
         register,

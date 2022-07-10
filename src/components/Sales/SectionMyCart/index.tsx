@@ -76,8 +76,8 @@ function SectionMyCart({
                             <SectionMyCartItem key={product.id}>
                                 <MyCartItemImage>
                                     <img
-                                        src={`${process.env.BASE_URL_IMAGE_LOCAL}/${product.image_name}`}
-                                        alt={`Image da ${product.description} contido no carrinho`}
+                                        src={product.url}
+                                        alt={`Image da ${product.url} contido no carrinho`}
                                     />
                                 </MyCartItemImage>
                                 <MyCartItemTitle>

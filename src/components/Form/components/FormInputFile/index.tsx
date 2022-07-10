@@ -103,7 +103,7 @@ const FormInputFileBase: ForwardRefRenderFunction<
                 );
 
                 setImageUrl(response.data.image_name);
-                setLocalImageUrl(URL.createObjectURL(event.target.files[0]));
+                setLocalImageUrl(response.data.url_image);
             } catch (error: any) {
                 if (error?.message === 'Cancelled image upload.') return;
 
