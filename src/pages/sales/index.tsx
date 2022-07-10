@@ -68,17 +68,20 @@ export default function Sales({ loggedUser, sales }: ISalesProps) {
         },
     );
 
-    const handleDeleteSale = useCallback(async (saleId: string) => {
-        try {
-            await deleteSale.mutateAsync(saleId);
-            toast.success('venda removida com sucesso');
-            setIsOpenDeleteModal(false);
-        } catch (error: any) {
-            toast.error(error.message);
-        } finally {
-            setSaleSelected({} as Sale);
-        }
-    }, []);
+    const handleDeleteSale = useCallback(
+        async (saleId: string) => {
+            try {
+                await deleteSale.mutateAsync(saleId);
+                toast.success('venda removida com sucesso');
+                setIsOpenDeleteModal(false);
+            } catch (error: any) {
+                toast.error(error.message);
+            } finally {
+                setSaleSelected({} as Sale);
+            }
+        },
+        [deleteSale],
+    );
 
     return (
         <PageContainer userName={loggedUser.name}>

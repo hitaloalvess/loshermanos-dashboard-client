@@ -57,18 +57,21 @@ export default function UpdateSale({
         return total;
     }, [listSelectedProducts]);
 
-    function updateListProducts(product: Product) {
-        const newList = listProducts?.map(elem => {
-            if (elem.id === product.id) {
-                return {
-                    ...elem,
-                    amount: product.amount,
-                };
-            }
-            return elem;
-        });
-        setListProducts(newList);
-    }
+    const updateListProducts = useCallback(
+        (product: Product) => {
+            const newList = listProducts?.map(elem => {
+                if (elem.id === product.id) {
+                    return {
+                        ...elem,
+                        amount: product.amount,
+                    };
+                }
+                return elem;
+            });
+            setListProducts(newList);
+        },
+        [listProducts],
+    );
 
     const addProductFromSelectedList = useCallback(
         (product: Product) => {
@@ -90,7 +93,7 @@ export default function UpdateSale({
 
             updateListProducts(product);
         },
-        [listSelectedProducts, listProducts, updateListProducts],
+        [listSelectedProducts, updateListProducts],
     );
 
     const removeProductFromSelectedList = useCallback(
@@ -102,7 +105,7 @@ export default function UpdateSale({
 
             updateListProducts(product);
         },
-        [listSelectedProducts, listProducts, updateListProducts],
+        [listSelectedProducts, updateListProducts],
     );
 
     const updateStage = useCallback(
