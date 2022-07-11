@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Minus, Plus } from 'phosphor-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Product } from '../../../../@types';
 import { formatInReal } from '../../../../utils/formatInReal';
@@ -16,29 +16,34 @@ import {
 
 interface IProductCardProps {
     product: Product;
-    funAddProduct: (product: Product) => void;
-    funRemoveProduct: (product: Product) => void;
+    handleSelectedProductList: (product: Product) => void;
 }
 
 function ProductCardForSales({
     product,
-    funAddProduct,
-    funRemoveProduct,
+    handleSelectedProductList,
 }: IProductCardProps) {
     const [count, setCount] = useState<number>(product.amount || 0);
 
-    useEffect(() => {
-        const item = {
+    function updateProductQuantity(operation: 'add' | 'remove') {
+        let newAmout = 0;
+
+        if (operation === 'add') {
+            setCount(count + 1);
+
+            newAmout = count + 1;
+        } else {
+            setCount(count - 1);
+            newAmout = count - 1;
+        }
+
+        const newProduct = {
             ...product,
-            amount: count,
+            amount: newAmout,
         };
 
-        if (count > 0) {
-            funAddProduct(item);
-        } else {
-            funRemoveProduct(item);
-        }
-    }, [count, funAddProduct, funRemoveProduct, product]);
+        handleSelectedProductList(newProduct);
+    }
 
     return (
         <ProductCardContainer>
@@ -46,8 +51,8 @@ function ProductCardForSales({
                 <Image
                     src={product.url}
                     alt="imagem do card do produto"
-                    loading="lazy"
                     layout="fill"
+                    priority={!!product.id}
                 />
                 <ProductCardPrice>
                     <p>{`${formatInReal(product.price)}`}</p>
@@ -58,13 +63,21 @@ function ProductCardForSales({
             </ProductCardBanner>
             <ProductCardActionsForSales>
                 <>
-                    <SalesCardButton onClick={() => setCount(count - 1)}>
+                    <SalesCardButton
+                        onClick={async () => {
+                            updateProductQuantity('remove');
+                        }}
+                    >
                         <Minus />
                     </SalesCardButton>
 
-                    <SalesCardCount>{product.amount}</SalesCardCount>
+                    <SalesCardCount>{count}</SalesCardCount>
 
-                    <SalesCardButton onClick={() => setCount(count + 1)}>
+                    <SalesCardButton
+                        onClick={async () => {
+                            updateProductQuantity('add');
+                        }}
+                    >
                         <Plus />
                     </SalesCardButton>
                 </>

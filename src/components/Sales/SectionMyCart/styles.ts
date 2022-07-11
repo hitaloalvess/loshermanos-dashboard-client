@@ -16,6 +16,7 @@ const SectionMyCartTitle = styled.header`
 `;
 
 const SectionMyCartItems = styled.table`
+    position: relative;
     width: 100%;
     margin: 2.4rem 0;
     border-collapse: separate;
@@ -51,13 +52,14 @@ const SectionMyCartItems = styled.table`
 const SectionMyCartItem = styled.tr``;
 
 const MyCartItemImage = styled.td`
+    position: relative;
     width: 8rem;
     height: 8rem;
     border-radius: 8px;
     img {
-        width: 100%;
-        height: 100%;
-        border-radius: inherit;
+        width: 8rem;
+        height: 8rem;
+        border-radius: 5px;
     }
 `;
 

@@ -117,37 +117,39 @@ export default function RegisterSale({
         [listProducts],
     );
 
-    const removeProductFromSelectedList = useCallback(
+    const handleSelectedProductList = useCallback(
         (product: Product) => {
-            const newList = listSelectedProducts.filter(
-                elem => elem.id !== product.id,
-            );
-            setListSelectedProducts(newList);
+            const productExists = listSelectedProducts.find(
+                item => item.id === product.id,
+            ) as Product;
 
             updateListProducts(product);
-        },
-        [listSelectedProducts, updateListProducts],
-    );
 
-    const addProductFromSelectedList = useCallback(
-        (product: Product) => {
-            const index = listSelectedProducts?.findIndex(
-                elem => elem.id === product.id,
-            );
-
-            if (index >= 0) {
-                const newListProducts = listSelectedProducts.map((elem, i) => {
-                    return i === index
-                        ? { ...elem, amount: product.amount }
-                        : elem;
-                });
-
-                setListSelectedProducts(newListProducts);
-            } else {
+            if (!productExists) {
                 setListSelectedProducts([...listSelectedProducts, product]);
+
+                return;
             }
 
-            updateListProducts(product);
+            let newListProducts;
+
+            if (Number(productExists.amount) <= 0) {
+                newListProducts = listSelectedProducts.filter(
+                    elem => elem.id !== productExists.id,
+                );
+
+                setListSelectedProducts(newListProducts);
+
+                return;
+            }
+
+            newListProducts = listSelectedProducts.map(elem => {
+                return elem.id === productExists.id
+                    ? { ...elem, amount: product.amount }
+                    : elem;
+            });
+
+            setListSelectedProducts(newListProducts);
         },
         [listSelectedProducts, updateListProducts],
     );
@@ -177,8 +179,9 @@ export default function RegisterSale({
                         <SectionAddProducts
                             listProducts={listProducts}
                             totalSale={totalSale}
-                            funAddProduct={addProductFromSelectedList}
-                            funRemoveProduct={removeProductFromSelectedList}
+                            handleSelectedProductList={
+                                handleSelectedProductList
+                            }
                             updateStage={updateStage}
                         />
                     )}
@@ -188,8 +191,9 @@ export default function RegisterSale({
                             listProducts={listSelectedProducts}
                             totalSale={totalSale}
                             updateStage={updateStage}
-                            increaseProduct={addProductFromSelectedList}
-                            decreaseProduct={removeProductFromSelectedList}
+                            handleSelectedProductList={
+                                handleSelectedProductList
+                            }
                         />
                     )}
 

@@ -14,24 +14,21 @@ import {
 interface ISectionAddProductsProps {
     listProducts: Product[];
     totalSale: number;
-    funAddProduct: (product: Product) => void;
-    funRemoveProduct: (product: Product) => void;
+    handleSelectedProductList: (product: Product) => void;
     updateStage: (currentStage: number) => void;
 }
 
 function SectionAddProducts({
     listProducts,
     totalSale,
-    funAddProduct,
-    funRemoveProduct,
+    handleSelectedProductList,
     updateStage,
 }: ISectionAddProductsProps) {
     return (
         <AddProductsContainer>
             <ProductsList
                 saleProducts={listProducts}
-                funAddProduct={funAddProduct}
-                funRemoveProduct={funRemoveProduct}
+                handleSelectedProductList={handleSelectedProductList}
             ></ProductsList>
 
             <AddProductsFooter>

@@ -23,36 +23,41 @@ interface ISectionMyCart {
     listProducts: Product[];
     totalSale: number;
     updateStage: (currentStage: number) => void;
-    decreaseProduct: (product: Product) => void;
-    increaseProduct: (product: Product) => void;
+    handleSelectedProductList: (product: Product) => void;
 }
 
 function SectionMyCart({
     listProducts,
     totalSale,
     updateStage,
-    decreaseProduct,
-    increaseProduct,
+    handleSelectedProductList,
 }: ISectionMyCart) {
-    function increaseQuantityOfProduct(product: Product) {
-        increaseProduct({
-            ...product,
-            amount: Number(product.amount) + 1,
-        });
-    }
+    function updateProductQuantity(
+        operation: 'add' | 'remove',
+        product: Product,
+    ) {
+        if (operation === 'add') {
+            handleSelectedProductList({
+                ...product,
+                amount: Number(product.amount) + 1,
+            });
 
-    function decreaseQuantityOfProduct(product: Product) {
+            return;
+        }
+
         if (Number(product.amount) - 1 > 0) {
-            increaseProduct({
+            handleSelectedProductList({
                 ...product,
                 amount: Number(product.amount) - 1,
             });
-        } else {
-            decreaseProduct({
-                ...product,
-                amount: 0,
-            });
+
+            return;
         }
+
+        handleSelectedProductList({
+            ...product,
+            amount: 0,
+        });
     }
 
     return (
@@ -89,7 +94,10 @@ function SectionMyCart({
                                 <MyCartItemCounter>
                                     <MyCartItemButton
                                         onClick={() =>
-                                            decreaseQuantityOfProduct(product)
+                                            updateProductQuantity(
+                                                'remove',
+                                                product,
+                                            )
                                         }
                                     >
                                         <Minus />
@@ -99,7 +107,10 @@ function SectionMyCart({
 
                                     <MyCartItemButton
                                         onClick={() =>
-                                            increaseQuantityOfProduct(product)
+                                            updateProductQuantity(
+                                                'add',
+                                                product,
+                                            )
                                         }
                                     >
                                         <Plus />

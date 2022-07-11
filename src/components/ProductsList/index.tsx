@@ -10,8 +10,7 @@ interface IProductsListProps {
     saleProducts?: Product[];
     funUpdateProduct?: (product: Product) => void;
     funDeleteProduct?: (product: Product) => void;
-    funAddProduct?: (product: Product) => void;
-    funRemoveProduct?: (product: Product) => void;
+    handleSelectedProductList: (product: Product) => void;
     children?: ReactElement;
 }
 
@@ -20,8 +19,7 @@ function ProductsList({
     saleProducts,
     funUpdateProduct,
     funDeleteProduct,
-    funAddProduct,
-    funRemoveProduct,
+    handleSelectedProductList,
     children,
 }: IProductsListProps) {
     return (
@@ -47,15 +45,8 @@ function ProductsList({
                                 <ProductCardForSales
                                     key={product.id}
                                     product={product}
-                                    funAddProduct={
-                                        funAddProduct as (
-                                            product: Product,
-                                        ) => void
-                                    }
-                                    funRemoveProduct={
-                                        funRemoveProduct as (
-                                            product: Product,
-                                        ) => void
+                                    handleSelectedProductList={
+                                        handleSelectedProductList
                                     }
                                 />
                             ))}
