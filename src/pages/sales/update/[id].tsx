@@ -73,37 +73,39 @@ export default function UpdateSale({
         [listProducts],
     );
 
-    const addProductFromSelectedList = useCallback(
+    const handleSelectedProductList = useCallback(
         (product: Product) => {
-            const index = listSelectedProducts?.findIndex(
-                elem => elem.id === product.id,
-            );
+            const productExists = listSelectedProducts.find(
+                item => item.id === product.id,
+            ) as Product;
 
-            if (index >= 0) {
-                const newListProducts = listSelectedProducts.map((elem, i) => {
-                    return i === index
-                        ? { ...elem, amount: product.amount }
-                        : elem;
-                });
+            updateListProducts(product);
 
-                setListSelectedProducts(newListProducts);
-            } else {
+            if (!productExists) {
                 setListSelectedProducts([...listSelectedProducts, product]);
+
+                return;
             }
 
-            updateListProducts(product);
-        },
-        [listSelectedProducts, updateListProducts],
-    );
+            let newListProducts;
 
-    const removeProductFromSelectedList = useCallback(
-        (product: Product) => {
-            const newList = listSelectedProducts.filter(
-                elem => elem.id !== product.id,
-            );
-            setListSelectedProducts(newList);
+            if (Number(productExists.amount) <= 0) {
+                newListProducts = listSelectedProducts.filter(
+                    elem => elem.id !== productExists.id,
+                );
 
-            updateListProducts(product);
+                setListSelectedProducts(newListProducts);
+
+                return;
+            }
+
+            newListProducts = listSelectedProducts.map(elem => {
+                return elem.id === productExists.id
+                    ? { ...elem, amount: product.amount }
+                    : elem;
+            });
+
+            setListSelectedProducts(newListProducts);
         },
         [listSelectedProducts, updateListProducts],
     );
@@ -133,8 +135,9 @@ export default function UpdateSale({
                         <SectionAddProducts
                             listProducts={listProducts as Product[]}
                             totalSale={totalSale}
-                            funAddProduct={addProductFromSelectedList}
-                            funRemoveProduct={removeProductFromSelectedList}
+                            handleSelectedProductList={
+                                handleSelectedProductList
+                            }
                             updateStage={updateStage}
                         />
                     )}
@@ -143,9 +146,10 @@ export default function UpdateSale({
                         <SectionMyCart
                             listProducts={listSelectedProducts}
                             totalSale={totalSale}
+                            handleSelectedProductList={
+                                handleSelectedProductList
+                            }
                             updateStage={updateStage}
-                            increaseProduct={addProductFromSelectedList}
-                            decreaseProduct={removeProductFromSelectedList}
                         />
                     )}
 
