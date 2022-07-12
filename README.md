@@ -9,7 +9,7 @@
     <img alt="gif de apresentação do app" title="los_hermanos" src=".github/apresentacao-loshermanos.gif" />
 </div>
 </div>
-
+<br />
 <p align="center">
   <img alt="Next.js Logo" src="https://img.shields.io/badge/Next.js-@latest-F4A701?logo=next.js&labelColor=000">&nbsp;&nbsp;
   <img alt="React.js Logo" src="https://img.shields.io/badge/React.js-@latest-F4A701?logo=react&labelColor=fff">&nbsp;&nbsp;
