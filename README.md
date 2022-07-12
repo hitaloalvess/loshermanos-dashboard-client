@@ -13,12 +13,12 @@
 
 <br />
 
-<div>
+<div align="center">
 <img alt="gif de apresentação do app" title="los_hermanos" src=".github/apresentacao-loshermanos.gif" />
  
 <br />    
 
-<p align="center><a href="https://loshermanos-dashboard-client.vercel.app/">Clique para visitar o projeto</a></p>
+<a href="https://loshermanos-dashboard-client.vercel.app/">Clique para visitar o projeto</a>
 </div>
 
 <br/>
