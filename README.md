@@ -18,7 +18,7 @@
  
 <br />    
 
-<a href="https://loshermanos-dashboard-client.vercel.app/">Clique para visitar o projeto</a>
+<p align="center><a href="https://loshermanos-dashboard-client.vercel.app/">Clique para visitar o projeto</a></p>
 </div>
 
 <br/>
