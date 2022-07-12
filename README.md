@@ -14,11 +14,11 @@
 <br />
 
 <div>
-    <img alt="gif de apresentação do app" title="los_hermanos" src=".github/apresentacao-loshermanos.gif" />
-    
-    <br />
-    
-    <a href="https://loshermanos-dashboard-client.vercel.app/">Clique para visitar o projeto</a>
+<img alt="gif de apresentação do app" title="los_hermanos" src=".github/apresentacao-loshermanos.gif" />
+ 
+<br />    
+
+<a href="https://loshermanos-dashboard-client.vercel.app/">Clique para visitar o projeto</a>
 </div>
 
 <br/>
