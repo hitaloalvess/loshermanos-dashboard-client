@@ -1,11 +1,11 @@
-import { GetServerSidePropsContext, Redirect } from 'next';
+import { GetServerSidePropsContext } from 'next';
 import Router from 'next/router';
 import { destroyCookie, parseCookies, setCookie } from 'nookies';
-import { useEffect, createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { User } from '../@types';
-import { apiClient } from '../services/apiClient';
+import { api } from '../services/api';
 import { extractUserDataCookie } from '../utils/extractUserDataCookie';
 
 interface ISignInCredentials {
@@ -42,12 +42,12 @@ export const AuthContext = createContext({} as IAuthContextData);
 export function signOut(
     ctx: GetServerSidePropsContext | undefined = undefined,
 ) {
-    destroyCookie(undefined, '@LosHermanosDash.token');
-    destroyCookie(undefined, '@LosHermanosDash.refreshToken');
-
+    destroyCookie(ctx, '@LosHermanosDash.token');
+    destroyCookie(ctx, '@LosHermanosDash.refreshToken');
     if (!ctx) {
         Router.push('/');
     } else {
+        console.log();
         return {
             redirect: {
                 destination: '/',
@@ -68,7 +68,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
 
     async function signIn({ username, password }: ISignInCredentials) {
         try {
-            const response = await apiClient.post('/session', {
+            const response = await api.post('/session', {
                 username,
                 password,
             });
@@ -99,7 +99,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
                 id_account: response.data.user.id_account,
             });
 
-            apiClient.defaults.headers.common.Authorization = `Bearer ${token}`;
+            api.defaults.headers.common.Authorization = `Bearer ${token}`;
 
             Router.push('/dashboard');
         } catch (error: any) {
