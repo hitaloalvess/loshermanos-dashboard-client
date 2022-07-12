@@ -2,20 +2,24 @@
   <img alt="logo loshermanos dashboard" title="los_hermanos" src=".github/logo.png" width="250px" />
 
   <br />
-
-<a href="https://loshermanos-dashboard-client.vercel.app/">Clique para visitar o projeto</a>
-
-<div>
-    <img alt="gif de apresentação do app" title="los_hermanos" src=".github/apresentacao-loshermanos.gif" />
-</div>
-</div>
-<br />
+    
 <p align="center">
   <img alt="Next.js Logo" src="https://img.shields.io/badge/Next.js-@latest-F4A701?logo=next.js&labelColor=000">&nbsp;&nbsp;
   <img alt="React.js Logo" src="https://img.shields.io/badge/React.js-@latest-F4A701?logo=react&labelColor=fff">&nbsp;&nbsp;
   <img alt="Styled-Components logo" src="https://img.shields.io/badge/Styled%20Components-@latest-F4A701?logo=styled%20components&labelColor=fff">&nbsp;&nbsp;
   <img alt="TypeScript Logo" src="https://img.shields.io/badge/TypeScript-@latest-F4A701?logo=typescript&labelColor=fff">
 </p>
+</div>
+
+<br />
+
+<div>
+    <img alt="gif de apresentação do app" title="los_hermanos" src=".github/apresentacao-loshermanos.gif" />
+    
+    <br />
+    
+    <a href="https://loshermanos-dashboard-client.vercel.app/">Clique para visitar o projeto</a>
+</div>
 
 <br/>
 
